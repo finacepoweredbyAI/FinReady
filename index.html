@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinReady Academy | Job-Ready Finance Skills – Power BI, Excel + VBA + AI, SQL, FP&amp;A, Financial Modelling, AI for Finance</title>
+<meta name="description" content="FinReady Academy: job-ready finance skills for students, professionals, institutes, academies and corporate teams: Power BI, Advanced Excel with VBA and AI, SQL, FP&amp;A, financial modelling and AI for Finance, taught by an ex-Finance Director with 20+ years at Agilent Technologies and American Express.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{ink:'#1F2A44',slate:'#5A6782',paper:'#F5F7FB',mist:'#EDF1F8',line:'#E1E6EF',cy:'#5B6CD6',cyd:'#3A47A8',em:'#3F8C78',am:'#B86E24',rose:'#C04B67'},fontFamily:{sans:['"Public Sans"','system-ui','sans-serif'],display:['"Schibsted Grotesk"','"Public Sans"','sans-serif']}}}}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--paper:#F5F7FB;--mist:#EDF1F8;--card:#FFFFFF;--ink:#1F2A44;--slate:#5A6782;--line:#E1E6EF;--peri:#5B6CD6;--peri-tint:#E4E8FB;--peri-deep:#3A47A8;--sage:#4E9A86;--sage-tint:#DFF1EA;--apri:#D9893B;--apri-tint:#FCEBD8;--rose:#D0607A;--rose-tint:#FBE3E8}
+html{background:var(--paper)}
+body{font-family:'Public Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px}
+h1,h2,h3,.font-extrabold{font-family:'Schibsted Grotesk','Public Sans',sans-serif;letter-spacing:-.01em}
+h1{letter-spacing:-.02em}
+.mono{font-family:'Public Sans',system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.code{font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;font-size:12px;line-height:1.55;white-space:pre;overflow-x:auto;background:#1F2A44;color:#E6EAF5;border-radius:12px;padding:14px 16px}
+.code .k{color:#9FB0FF}.code .s{color:#8FD6BE}.code .c{color:#8C98B3}
+.font-extrabold,.text-2xl,.text-3xl,.text-4xl{font-variant-numeric:tabular-nums}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px rgba(31,42,68,.04)}
+.grad{color:var(--peri-deep);background:none}
+.reveal{opacity:1;transform:none}
+.tab{padding:.55rem .9rem;border-radius:.75rem;font-size:.82rem;font-weight:600;color:var(--slate);border:1px solid var(--line);background:var(--card);cursor:pointer;position:relative;transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s}
+.tab:not(.active):hover{transform:translateY(-2px);border-color:#9AA6EA;color:var(--peri-deep);box-shadow:0 6px 14px rgba(91,108,214,.14)}
+.tab.active{background:var(--peri-tint);color:var(--peri-deep);border-color:#B9C2F0}
+.chip{padding:.4rem .8rem;border-radius:999px;font-size:.75rem;border:1px solid var(--line);color:var(--slate);cursor:pointer;transition:background .15s,color .15s,border-color .15s;background:var(--card)}
+.chip:hover,.chip.active{border-color:#B9C2F0;color:var(--peri-deep);background:var(--peri-tint)}
+.aud{padding:.7rem 1rem;border-radius:.9rem;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:.85rem;color:var(--slate);cursor:pointer;text-align:left;transition:all .15s}
+.aud.active{border-color:var(--peri);background:var(--peri-tint);color:var(--peri-deep)}
+input[type=range]{accent-color:var(--peri);width:100%}
+input[type=checkbox]{accent-color:var(--peri);width:16px;height:16px}
+select{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.45rem .6rem;font-size:.85rem;color:var(--ink)}
+input[type=text],#chatIn{color:var(--ink)}
+.msg-user{background:var(--peri);color:#fff;border-radius:1rem 1rem .25rem 1rem}
+.msg-bot{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:1rem 1rem 1rem .25rem}
+.dot{animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.grid>*{min-width:0}
+.tbl{width:100%;font-size:12px;border-collapse:collapse}
+.tbl th{text-align:left;color:var(--slate);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.num,.tbl th.num{text-align:right}
+.tbl tr.hl td{background:var(--peri-tint)}
+.tbl td.newcol{background:#F0F9F5;color:#2F6E5E;font-weight:600}
+.opt{display:block;width:100%;text-align:left;padding:.75rem 1rem;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:.88rem;cursor:pointer;transition:all .15s}
+.opt:hover{border-color:#9AA6EA}
+.opt.right{border-color:var(--sage);background:var(--sage-tint)}
+.opt.wrong{border-color:var(--rose);background:var(--rose-tint)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--peri);outline-offset:2px}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#CBD3E1;border-radius:8px}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details[open] .chev{transform:rotate(180deg)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{nav,.no-print{display:none}}
+</style>
+</head>
+<body class="antialiased selection:bg-[#E4E8FB] selection:text-ink">
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-white/90 border-b border-line">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3"><svg viewBox="0 0 40 40" class="w-9 h-9 shrink-0" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#3A47A8"/><rect x="9" y="22" width="5" height="9" rx="1.5" fill="#9FB0FF"/><rect x="17.5" y="16" width="5" height="15" rx="1.5" fill="#C9D1FF"/><rect x="26" y="10" width="5" height="21" rx="1.5" fill="#fff"/><path d="M8 19 L17 12 L23 15 L32 7" stroke="#8FD6BE" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="leading-tight"><div class="font-extrabold text-ink text-[15px] tracking-tight">Fin<span class="text-cyd">Ready</span> Academy</div><div class="hidden sm:block text-[11px] text-slate">Job-ready finance skills · by Puneet Bajaj</div></div>
+    </a>
+    <div class="hidden lg:flex items-center gap-6 text-sm text-slate">
+      <a href="#who" class="hover:text-cyd">Who It's For</a>
+      <a href="#program" class="hover:text-cyd">Courses</a>
+      <a href="#lab" class="hover:text-cyd">Live Demos</a>
+      <a href="#formats" class="hover:text-cyd">Ways to Learn</a>
+      <a href="#trainer" class="hover:text-cyd">Your Mentor</a>
+      <a href="#partner" class="hover:text-cyd">Partner</a>
+      <a href="#faq" class="hover:text-cyd">FAQ</a>
+    </div>
+    <a href="#contact" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-cy text-white font-bold text-sm leading-none whitespace-nowrap hover:bg-cyd transition"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 w-4 h-4" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg><span class="hidden sm:inline">Enquire Now</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="relative pt-28 pb-10 px-5 overflow-hidden">
+  <div aria-hidden="true" class="absolute -top-24 -right-24 w-[520px] h-[520px] rounded-full" style="background:radial-gradient(closest-side,rgba(91,108,214,.16),transparent)"></div>
+  <div aria-hidden="true" class="absolute top-64 -left-32 w-[420px] h-[420px] rounded-full" style="background:radial-gradient(closest-side,rgba(78,154,134,.12),transparent)"></div>
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-center relative">
+    <div class="lg:col-span-7 space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl sm:rounded-full border border-em/40 bg-em/10 text-em text-xs font-semibold">
+        <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-em opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-em"></span></span>
+        Admissions open · Live cohorts, bootcamps &amp; corporate programs
+      </div>
+      <h1 class="text-4xl sm:text-5xl xl:text-[3.5rem] font-extrabold text-ink leading-[1.07] tracking-tight">
+        A degree alone won't get you hired. <span class="grad">Job-ready finance skills will.</span>
+      </h1>
+      <p class="text-lg text-slate max-w-2xl leading-relaxed">Hiring is tight and layoffs are making headlines. Companies now hire people who can deliver from day one. Learn the exact skills finance teams use every month, from an <b class="text-ink">ex-Finance Director with 20+ years</b> and experienced finance professionals from multinationals and corporates.</p>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <span class="chip" style="cursor:default">📊 Power BI</span><span class="chip" style="cursor:default">📗 Excel + VBA + AI</span><span class="chip" style="cursor:default">🗄️ SQL</span><span class="chip" style="cursor:default">📈 FP&amp;A</span><span class="chip" style="cursor:default">💹 Financial Modelling</span><span class="chip" style="cursor:default">🤖 AI for Finance</span><span class="chip" style="cursor:default">🎤 Interview Prep</span>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="#program" class="inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto rounded-xl bg-cy text-white font-bold text-sm leading-none whitespace-nowrap hover:bg-cyd transition">Start your job-ready journey <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 w-4 h-4" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#lab" class="panel inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto !rounded-xl text-sm font-semibold text-ink leading-none whitespace-nowrap hover:border-cy transition">▶ Try 10 live demos</a>
+      </div>
+      <div class="text-xs text-slate">For <a href="#who" class="text-cyd font-semibold hover:underline">students &amp; graduates</a> · <a href="#who" class="text-cyd font-semibold hover:underline">working professionals</a> · <a href="#who" class="text-cyd font-semibold hover:underline">institutes &amp; academies</a> · <a href="#who" class="text-cyd font-semibold hover:underline">corporate teams</a></div>
+    </div>
+
+    <div class="lg:col-span-5">
+      <div class="panel overflow-hidden shadow-xl" style="box-shadow:0 20px 50px -20px rgba(31,42,68,.25)">
+        <div class="p-6 text-white" style="background:linear-gradient(135deg,#3A47A8 0%,#5B6CD6 60%,#4E9A86 140%)">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 shrink-0 rounded-2xl bg-white/15 border border-white/30 flex items-center justify-center text-2xl font-extrabold">PB</div>
+            <div>
+              <div class="text-[11px] uppercase tracking-wider text-white/75 font-semibold">Founder &amp; Lead Mentor</div>
+              <div class="text-xl font-extrabold">Puneet Bajaj</div>
+              <div class="text-sm text-white/85">Ex-Finance Director · 20+ years</div>
+            </div>
+          </div>
+          <div class="mt-5 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-xl bg-white/10 border border-white/20 py-2.5"><div class="text-lg font-extrabold">$7B</div><div class="text-[10px] text-white/80 leading-tight">business in his<br>CFO reporting</div></div>
+            <div class="rounded-xl bg-white/10 border border-white/20 py-2.5"><div class="text-lg font-extrabold">3</div><div class="text-[10px] text-white/80 leading-tight">continents:<br>USA · UK · APAC</div></div>
+            <div class="rounded-xl bg-white/10 border border-white/20 py-2.5"><div class="text-lg font-extrabold">7</div><div class="text-[10px] text-white/80 leading-tight">corporate awards,<br>incl. CFO Club</div></div>
+          </div>
+          <div class="mt-4 text-[11px] text-white/80">Agilent Technologies · American Express · Global Capability Centre leadership</div>
+        </div>
+        <div class="p-6 space-y-3">
+          <div class="text-xs font-bold text-ink uppercase tracking-wide">After FinReady, you can walk in and…</div>
+          <ul class="space-y-2.5 text-sm text-ink" id="canDo"></ul>
+          <div class="flex items-center gap-2 pt-3 border-t border-line text-xs text-slate">
+            <span class="text-base">💡</span><span><b class="text-ink">The interview test:</b> "Show me something you've built." Our learners can.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MARKET -->
+<section class="px-5 pb-14">
+  <div class="max-w-7xl mx-auto rounded-2xl overflow-hidden" style="background:#1F2A44">
+    <div class="grid md:grid-cols-4">
+      <div class="p-6 md:border-r border-white/10"><div class="text-[11px] mono text-[#9FB0FF] font-semibold mb-1">THE MARKET HAS CHANGED</div><div class="text-white font-extrabold text-lg leading-snug">Why graduation alone isn't enough anymore</div></div>
+      <div class="p-6 md:border-r border-white/10"><div class="text-2xl mb-2">📉</div><div class="text-white font-semibold text-sm mb-1">Fewer seats, more applicants</div><div class="text-xs text-white/70 leading-relaxed">Layoffs and cautious hiring mean every finance opening gets a flood of applications with identical degrees.</div></div>
+      <div class="p-6 md:border-r border-white/10"><div class="text-2xl mb-2">🧪</div><div class="text-white font-semibold text-sm mb-1">Tools are tested, not assumed</div><div class="text-xs text-white/70 leading-relaxed">Excel tests, SQL questions, Power BI and case rounds decide who moves forward, well before marks matter.</div></div>
+      <div class="p-6"><div class="text-2xl mb-2">🤖</div><div class="text-white font-semibold text-sm mb-1">AI is reshaping finance work</div><div class="text-xs text-white/70 leading-relaxed">Routine work is being automated. The people hired are the ones who can use AI and automation, not compete with them.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who" class="py-16 px-5 border-t border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">WHO IT'S FOR</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Job-ready finance skills for every stage of your career</h2>
+      <p class="text-slate mt-3 text-sm leading-relaxed">Whether you're starting out, switching roles, running a training business or building a finance team, the skills are the same ones I used and hired for every day in corporate finance.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="whoCards"></div>
+  </div>
+</section>
+
+<!-- GAP -->
+<section id="gap" class="py-16 px-5 bg-mist border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">WHY PRACTICAL SKILLS</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">What degrees and certifications cover vs. what finance jobs ask for</h2>
+      <p class="text-slate mt-3 text-sm leading-relaxed">Theory gets you through exams. In finance roles you're judged on whether you can close the books, explain a variance, build the model and publish the dashboard, quickly and accurately. Every course here is built around that gap.</p>
+    </div>
+    <div class="panel overflow-hidden">
+      <div class="grid grid-cols-12 bg-mist text-xs font-semibold text-slate border-b border-line">
+        <div class="col-span-5 p-4">Typically covered in degrees &amp; certifications</div>
+        <div class="col-span-7 p-4 text-cyd">What Finance, FP&amp;A, MIS &amp; Analyst roles ask for</div>
+      </div>
+      <div id="gapRows"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program" class="py-16 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-8">
+      <div class="mono text-xs text-cyd mb-2">COURSES</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">11 practical courses. Take one, or follow a full learning path.</h2>
+      <p class="text-slate mt-3 text-sm">Every course is hands-on and built on real finance scenarios. Pick a ready-made path or tick the courses you need, and see how long it takes in your preferred format.</p>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 space-y-3">
+        <div class="flex flex-wrap gap-2 mb-2" id="presets">
+          <button class="chip active" data-p="flag">Complete Finance Analyst path</button>
+          <button class="chip" data-p="bi">Power BI + SQL for Finance</button>
+          <button class="chip" data-p="fpa">FP&amp;A + Financial Modelling</button>
+          <button class="chip" data-p="xl">Excel + VBA + AI</button>
+          <button class="chip" data-p="int">Interview sprint</button>
+        </div>
+        <div id="modList" class="grid sm:grid-cols-2 gap-3"></div>
+      </div>
+      <div class="panel p-6 space-y-5 h-fit lg:sticky lg:top-24">
+        <h3 class="font-bold text-ink">Your learning path</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-xl bg-paper border border-line p-3"><div class="text-xs text-slate">Courses</div><div class="text-2xl font-extrabold text-ink" id="pbMods">0</div></div>
+          <div class="rounded-xl bg-paper border border-line p-3"><div class="text-xs text-slate">Live hours</div><div class="text-2xl font-extrabold text-cyd" id="pbHrs">0</div></div>
+        </div>
+        <div>
+          <div class="text-xs text-slate mb-1">Learning format</div>
+          <select id="pbFmt" class="w-full">
+            <option value="6">Weekend cohort · 6 hrs/week</option>
+            <option value="9" selected>Regular cohort · 9 hrs/week</option>
+            <option value="15">Fast-track bootcamp · 15 hrs/week</option>
+          </select>
+        </div>
+        <div class="rounded-xl p-4" style="background:var(--peri-tint)">
+          <div class="text-xs text-slate">Duration</div>
+          <div class="text-3xl font-extrabold text-cyd" id="pbWeeks">–</div>
+          <div class="text-xs text-slate mt-1" id="pbProj"></div>
+        </div>
+        <div>
+          <div class="text-xs text-slate mb-2">Roles this prepares you for</div>
+          <div class="flex flex-wrap gap-1.5" id="pbRoles"></div>
+        </div>
+        <a href="#contact" data-subj="Course enquiry" class="subjLink inline-flex items-center justify-center w-full h-11 rounded-xl bg-cy text-white font-bold text-sm hover:bg-cyd">Enquire about this path</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAB -->
+<section id="lab" class="py-16 px-5 bg-mist border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-8">
+      <div class="mono text-xs text-cyd mb-2">LIVE DEMO LAB</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Don't take my word for it. Try what you'll build.</h2>
+      <p class="text-slate mt-3 text-sm">Ten working demos that run in your browser on <span class="text-ink font-semibold">synthetic, illustrative data</span>. Six are core skills you practise in class. Four are the kind of work I did for a $7B company's CFO, which you learn to build in advanced projects.</p>
+    </div>
+    <div id="tabs" class="space-y-3 mb-6">
+      <div>
+        <div class="text-[11px] mono text-em font-semibold mb-2">CORE SKILLS · HANDS-ON LABS</div>
+        <div class="flex flex-wrap gap-2">
+          <button class="tab active" data-tab="s1">📗 Excel + VBA + AI</button>
+          <button class="tab" data-tab="s2">🗄️ SQL for Finance</button>
+          <button class="tab" data-tab="s3">📊 Power BI Dashboard</button>
+          <button class="tab" data-tab="s4">💹 Financial Model (DCF)</button>
+          <button class="tab" data-tab="s5">🎤 Interview Simulator</button>
+          <button class="tab" data-tab="s6">🧭 Job-Readiness Check</button>
+        </div>
+      </div>
+      <div>
+        <div class="text-[11px] mono text-cyd font-semibold mb-2">REAL CFO-LEVEL WORK · ADVANCED SIMULATIONS</div>
+        <div class="flex flex-wrap gap-2">
+          <button class="tab" data-tab="t1">📈 AI Forecast Lab</button>
+          <button class="tab" data-tab="t2">🤖 Ask Ana (GenAI)</button>
+          <button class="tab" data-tab="t3">🧮 Margin Bridge &amp; Headcount</button>
+          <button class="tab" data-tab="t4">🛰️ CFO Month Tracker</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- S1 Excel -->
+    <div id="s1" class="tabpane">
+      <div class="grid lg:grid-cols-5 gap-6">
+        <div class="panel p-6 lg:col-span-3 space-y-4">
+          <div class="flex items-start justify-between gap-3">
+            <div><h3 class="font-bold text-ink">Excel task: monthly expense review</h3><p class="text-xs text-slate">Pick a task. See the formula, the result, the VBA that automates it and the AI prompt that speeds it up.</p></div>
+            <span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30 whitespace-nowrap">₹ lakh · synthetic</span>
+          </div>
+          <div class="flex flex-wrap gap-2" id="xlTasks"></div>
+          <div class="rounded-xl border border-line overflow-hidden">
+            <div class="flex items-center gap-2 bg-[#1F7244] text-white text-xs px-3 py-2 overflow-x-auto"><span class="font-bold">fx</span><span id="xlFx" class="code !bg-transparent !p-0 !text-white !text-xs"></span></div>
+            <div class="overflow-x-auto" id="xlTable"></div>
+          </div>
+          <div class="text-sm text-slate" id="xlWhy"></div>
+        </div>
+        <div class="lg:col-span-2 space-y-4">
+          <div class="panel p-5"><div class="text-xs font-semibold text-ink mb-2">⚙️ VBA: automate it</div><div class="code" id="xlVba"></div></div>
+          <div class="panel p-5"><div class="text-xs font-semibold text-ink mb-2">✨ AI prompt: work 5× faster</div><div class="text-sm text-slate bg-paper border border-line rounded-xl p-3 leading-relaxed" id="xlAi"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S2 SQL -->
+    <div id="s2" class="tabpane hidden">
+      <div class="grid lg:grid-cols-5 gap-6">
+        <div class="panel p-6 lg:col-span-2 space-y-4">
+          <div class="flex items-start justify-between gap-3"><h3 class="font-bold text-ink">Query a general ledger</h3><span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">synthetic</span></div>
+          <p class="text-xs text-slate">Tables: <span class="mono text-ink">gl</span> (month, cost_center, account, amount), <span class="mono text-ink">budget</span> (month, cost_center, budget), <span class="mono text-ink">ap_invoices</span> (vendor, invoice_no, amount). Amounts in ₹ lakh.</p>
+          <div class="flex flex-col gap-2" id="sqlQs"></div>
+          <div class="text-xs text-slate leading-relaxed border-t border-line pt-3" id="sqlWhy"></div>
+        </div>
+        <div class="lg:col-span-3 space-y-4">
+          <div class="relative"><div class="code" id="sqlCode"></div><button id="sqlRun" class="absolute top-3 right-3 bg-em text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:opacity-90">▶ Run</button></div>
+          <div class="panel p-4"><div class="flex justify-between text-xs text-slate mb-2"><span>Result</span><span id="sqlMeta" class="mono"></span></div><div class="overflow-x-auto" id="sqlOut"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S3 Power BI -->
+    <div id="s3" class="tabpane hidden">
+      <div class="panel p-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div><h3 class="font-bold text-ink">Sales &amp; margin dashboard · FY 2025-26</h3><p class="text-xs text-slate">Slicers filter every visual. Click a region bar to cross-filter, the way Power BI does.</p></div>
+          <span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">₹ crore · synthetic</span>
+        </div>
+        <div class="flex flex-wrap gap-4 mb-4">
+          <div><div class="text-[11px] text-slate mb-1">Region</div><div class="flex flex-wrap gap-1.5" id="pbiReg"></div></div>
+          <div><div class="text-[11px] text-slate mb-1">Category</div><div class="flex flex-wrap gap-1.5" id="pbiCat"></div></div>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4" id="pbiKpis"></div>
+        <div class="grid lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 rounded-xl border border-line p-4"><div class="text-xs font-semibold text-ink mb-2">Revenue: actual vs budget by month</div><div class="relative h-64"><canvas id="pbiMonth"></canvas></div></div>
+          <div class="rounded-xl border border-line p-4"><div class="text-xs font-semibold text-ink mb-2">Revenue by region (click to filter)</div><div class="relative h-64"><canvas id="pbiRegion"></canvas></div></div>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6 mt-6">
+        <div class="panel p-5"><div class="text-xs font-semibold text-ink mb-2">DAX measures behind this dashboard (taught in Module 4)</div><div class="code"><span class="k">Revenue</span> = SUM ( Sales[Revenue] )
+<span class="k">Budget</span> = SUM ( Budget[Amount] )
+<span class="k">Var %</span> = DIVIDE ( [Revenue] - [Budget], [Budget] )
+<span class="k">Gross Margin %</span> = DIVIDE ( [Gross Profit], [Revenue] )
+<span class="k">Revenue YTD</span> = TOTALYTD ( [Revenue], <span class="s">'Date'[Date]</span>, <span class="s">"31/3"</span> )
+<span class="k">Revenue PY</span> = CALCULATE ( [Revenue], SAMEPERIODLASTYEAR ( <span class="s">'Date'[Date]</span> ) )</div></div>
+        <div class="panel p-5 text-sm text-slate leading-relaxed" id="pbiInsight"></div>
+      </div>
+    </div>
+
+    <!-- S4 DCF -->
+    <div id="s4" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 space-y-4">
+          <div class="flex items-center justify-between"><h3 class="font-bold text-ink">Model assumptions</h3><span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">₹ crore</span></div>
+          <div id="dcfInputs" class="space-y-4"></div>
+        </div>
+        <div class="lg:col-span-2 space-y-6">
+          <div class="grid sm:grid-cols-3 gap-4" id="dcfKpis"></div>
+          <div class="panel p-5 overflow-x-auto"><div class="text-xs font-semibold text-ink mb-2">5-year projection &amp; free cash flow</div><div id="dcfTable"></div></div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="panel p-5"><div class="text-xs font-semibold text-ink mb-2">Where the value comes from</div><div class="relative h-56"><canvas id="dcfChart"></canvas></div></div>
+            <div class="panel p-5 overflow-x-auto"><div class="text-xs font-semibold text-ink mb-1">Sensitivity: equity value (₹ Cr)</div><div class="text-[11px] text-slate mb-2">Rows: WACC · Columns: terminal growth. Interviewers love asking about this table.</div><div id="dcfSens"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5 Interview -->
+    <div id="s5" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 lg:col-span-2 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap gap-2" id="ivCats"></div>
+            <span class="mono text-xs text-slate" id="ivProg"></span>
+          </div>
+          <div class="h-1.5 bg-paper rounded"><div class="h-1.5 rounded bg-cy transition-all" id="ivBar" style="width:0"></div></div>
+          <div class="text-[11px] mono text-cyd" id="ivTag"></div>
+          <h3 class="text-lg font-bold text-ink leading-snug" id="ivQ"></h3>
+          <div class="space-y-2" id="ivOpts"></div>
+          <div class="hidden rounded-xl border border-line bg-paper p-4 text-sm text-slate leading-relaxed" id="ivExp"></div>
+          <div class="flex justify-end"><button id="ivNext" class="hidden bg-cy text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-cyd">Next question →</button></div>
+        </div>
+        <div class="panel p-6 space-y-4 h-fit">
+          <h3 class="font-bold text-ink">Your score</h3>
+          <div class="text-5xl font-extrabold text-cyd" id="ivScore">0/0</div>
+          <div class="text-xs text-slate leading-relaxed" id="ivVerdict">These are the kinds of questions asked in technical rounds for finance analyst roles at GCCs, Big 4 and corporates. In the program, every student does at least three mock interviews with me.</div>
+          <button id="ivReset" class="chip w-full text-center">Restart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6 Readiness -->
+    <div id="s6" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 space-y-4">
+          <h3 class="font-bold text-ink">Rate yourself honestly (0–5)</h3>
+          <div id="rdSliders" class="space-y-3"></div>
+        </div>
+        <div class="panel p-6"><div class="text-xs font-semibold text-ink mb-2">You vs. what I expect from an entry-level finance analyst</div><div class="relative h-80"><canvas id="rdRadar"></canvas></div></div>
+        <div class="panel p-6 space-y-4">
+          <div class="rounded-xl bg-paper border border-line p-4 text-center"><div class="text-xs text-slate">Job-readiness score</div><div class="text-5xl font-extrabold" id="rdScore">–</div><div class="text-xs text-slate mt-1" id="rdBand"></div></div>
+          <div><div class="text-xs font-semibold text-ink mb-2">Your biggest gaps → module that fixes them</div><div id="rdGaps" class="space-y-2"></div></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TAB 1 -->
+    <div id="t1" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 lg:col-span-2">
+          <div class="flex items-start justify-between gap-3 mb-4">
+            <div><h3 class="font-bold text-ink">Backtest a revenue forecast</h3><p class="text-xs text-slate">Train on history, forecast the hold-out, score against actuals (MAPE → accuracy).</p></div>
+            <span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">synthetic data</span>
+          </div>
+          <div class="relative h-80"><canvas id="fcChart"></canvas></div>
+        </div>
+        <div class="panel p-6 space-y-5">
+          <div>
+            <div class="text-xs text-slate mb-2">Model</div>
+            <div class="flex flex-wrap gap-2" id="modelChips"></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs text-slate"><span>Forecast horizon</span><span class="mono text-cyd" id="hVal">6 months</span></div>
+            <input type="range" id="hor" min="3" max="12" value="6">
+          </div>
+          <div>
+            <div class="flex justify-between text-xs text-slate"><span>Data noise (volatility)</span><span class="mono text-cyd" id="nVal">Medium</span></div>
+            <input type="range" id="noise" min="1" max="3" value="2">
+          </div>
+          <div class="rounded-xl bg-paper border border-line p-4 text-center">
+            <div class="text-xs text-slate">Selected model accuracy</div>
+            <div class="text-4xl font-extrabold grad" id="accOut">--</div>
+            <div class="text-xs text-slate/80 mono" id="mapeOut"></div>
+          </div>
+          <div>
+            <div class="text-xs text-slate mb-2">Leaderboard (live)</div>
+            <div id="board" class="space-y-2"></div>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-slate/80 mt-3">Demo uses lightweight in-browser models. In production I use XGBoost, LightGBM, SARIMAX, Prophet and LSTM in Python, with driver-based features (backlog, pipeline, seasonality, FX) and finance review of every forecast.</p>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="t2" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-0 lg:col-span-2 flex flex-col h-[520px]">
+          <div class="px-5 py-4 border-b border-line flex items-center justify-between">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-cy text-white font-bold flex items-center justify-center">A</div><div><div class="text-ink font-semibold text-sm">Ask Ana</div><div class="text-[11px] text-em">● demo mode · sample P&L</div></div></div>
+            <span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">synthetic data</span>
+          </div>
+          <div id="chat" class="flex-1 overflow-y-auto p-5 space-y-4 text-sm"></div>
+          <form id="chatForm" class="p-4 border-t border-line flex gap-2">
+            <input id="chatIn" autocomplete="off" placeholder="Ask e.g. “Why did gross margin miss plan in Q3?”" class="flex-1 bg-paper border border-line rounded-xl px-4 py-3 text-sm text-ink outline-none focus:border-cy">
+            <button class="bg-cy text-white font-bold rounded-xl px-5 text-sm hover:bg-cyd">Ask</button>
+          </form>
+        </div>
+        <div class="panel p-6 space-y-4">
+          <h3 class="font-bold text-ink">Try these</h3>
+          <div class="flex flex-col gap-2" id="suggest"></div>
+          <div class="text-xs text-slate leading-relaxed border-t border-line pt-4">
+            The real <em>Ask Ana</em> connects natural-language questions to governed P&L, margin, variance and forecast data. This demo shows the experience with a small synthetic dataset and rule-based intent matching. No company data is shown here.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3 -->
+    <div id="t3" class="tabpane hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 space-y-5">
+          <div class="flex items-center justify-between"><h3 class="font-bold text-ink">Scenario drivers</h3><span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">illustrative</span></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Annual revenue plan</span><span class="mono text-cyd" id="rVal"></span></div><input type="range" id="rev" min="500" max="2000" step="50" value="1000"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Gross margin %</span><span class="mono text-cyd" id="gmVal"></span></div><input type="range" id="gm" min="40" max="70" step="0.5" value="55"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Current opex % of revenue</span><span class="mono text-cyd" id="oxVal"></span></div><input type="range" id="ox" min="20" max="50" step="0.5" value="32"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Target operating margin %</span><span class="mono text-cyd" id="tmVal"></span></div><input type="range" id="tm" min="10" max="35" step="0.5" value="22"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Loaded cost per head ($K)</span><span class="mono text-cyd" id="lcVal"></span></div><input type="range" id="lc" min="40" max="200" step="5" value="95"></div>
+          <hr class="border-line">
+          <div class="text-xs text-slate font-semibold">Variance levers vs plan (% of revenue)</div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Price</span><span class="mono text-cyd" id="pVal"></span></div><input type="range" id="pr" min="-3" max="3" step="0.25" value="1"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>Volume</span><span class="mono text-cyd" id="vVal"></span></div><input type="range" id="vo" min="-5" max="5" step="0.25" value="-1.5"></div>
+          <div><div class="flex justify-between text-xs text-slate"><span>FX</span><span class="mono text-cyd" id="fVal"></span></div><input type="range" id="fx" min="-3" max="3" step="0.25" value="-0.75"></div>
+        </div>
+        <div class="lg:col-span-2 space-y-6">
+          <div class="grid sm:grid-cols-3 gap-4" id="kpiRow"></div>
+          <div class="panel p-6">
+            <h3 class="font-bold text-ink mb-1">Operating income bridge: Plan → Outlook</h3>
+            <p class="text-xs text-slate mb-3">Price, volume, FX and opex levers walk plan operating income to outlook, the way I frame variance for the CFO.</p>
+            <div class="relative h-72"><canvas id="bridgeChart"></canvas></div>
+          </div>
+          <div class="panel p-5 text-sm text-slate leading-relaxed" id="insight"></div>
+        </div>
+      </div>
+    </div>
+    <!-- TAB 4 -->
+    <div id="t4" class="tabpane hidden">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div>
+          <h3 class="font-bold text-ink text-lg">Daily Month-Progress Tracker: Orders · Revenue · Shipments · Backlog vs Daily Forecast</h3>
+          <p class="text-xs text-slate">Move the day slider to replay the month. Click a metric card to switch the chart. Insights regenerate for every day.</p>
+        </div>
+        <span class="mono text-[11px] px-2 py-1 rounded bg-am/10 text-am border border-am/30">synthetic data · $M</span>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" id="ctKpis"></div>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="panel p-6 lg:col-span-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div class="text-ink font-semibold text-sm" id="ctTitle"></div>
+            <div class="flex gap-2" id="ctViewChips">
+              <button class="chip active" data-v="cum">Cumulative (MTD)</button>
+              <button class="chip" data-v="day">Daily</button>
+            </div>
+          </div>
+          <div class="relative h-80"><canvas id="ctChart"></canvas></div>
+          <div class="mt-5">
+            <div class="text-xs text-slate mb-2" id="ctHeatTitle"></div>
+            <div id="ctHeat" class="flex gap-1"></div>
+            <div class="flex flex-wrap gap-3 text-[11px] text-slate/80 mt-2">
+              <span><span class="inline-block w-2.5 h-2.5 rounded-sm align-middle" style="background:#4E9A86"></span> ahead of forecast</span>
+              <span><span class="inline-block w-2.5 h-2.5 rounded-sm align-middle" style="background:#D9893B"></span> within ±2%</span>
+              <span><span class="inline-block w-2.5 h-2.5 rounded-sm align-middle" style="background:#D0607A"></span> behind forecast</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel p-6 space-y-5">
+          <h3 class="font-bold text-ink">Controls</h3>
+          <div>
+            <div class="flex justify-between text-xs text-slate"><span>Month progress</span><span class="mono text-cyd" id="ctDayVal"></span></div>
+            <input type="range" id="ctDay" min="1" max="22" value="14">
+            <div class="h-1.5 bg-paper rounded mt-2"><div class="h-1.5 rounded bg-cy" id="ctBar"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs text-slate"><span>Recovery lever: expedite remaining shipments & revenue</span><span class="mono text-cyd" id="ctExpVal"></span></div>
+            <input type="range" id="ctExp" min="0" max="15" step="1" value="0">
+          </div>
+          <div class="text-xs text-slate leading-relaxed border-t border-line pt-4">
+            <span class="text-ink font-semibold">How the landing is projected:</span> month-to-date pacing vs forecast is applied to the remaining forecast days, then adjusted by the recovery lever. Backlog = opening backlog + orders − shipments.
+          </div>
+          <button id="ctCopy" class="chip w-full text-center">Copy CFO summary</button>
+        </div>
+      </div>
+      <div class="mt-6">
+        <div class="flex items-center gap-2 mb-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 w-4 h-4 text-am" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><h3 class="font-bold text-ink">Actionable insights for today</h3><span class="text-[11px] text-slate/80 mono" id="ctInsTag"></span></div>
+        <div id="ctInsights" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </div>
+    <p class="text-xs text-slate/80 mt-4">All demos use synthetic data built for teaching. No employer or client data appears on this site.</p>
+  </div>
+</section>
+
+<!-- FORMATS -->
+<section id="formats" class="py-16 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">WAYS TO LEARN</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Choose the format that fits you</h2>
+      <p class="text-slate mt-3 text-sm">Every format is live and hands-on, with lab files, practical datasets and feedback from someone who has done the work.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="formatCards"></div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section id="students" class="py-16 px-5 bg-mist border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">WHAT YOU WALK AWAY WITH</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Work you can show, not just a certificate</h2>
+      <p class="text-slate mt-3 text-sm leading-relaxed">Recruiters and managers shortlist people who can open a laptop and show a dashboard, a model or a query they built. Whether you're a fresher or a professional moving into FP&amp;A or analytics, you finish with a portfolio and the confidence to explain it.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="panel p-6">
+        <h3 class="font-bold text-ink mb-4">Your portfolio: 6 projects you'll build</h3>
+        <ol class="space-y-3 text-sm" id="portfolio"></ol>
+      </div>
+      <div class="space-y-6">
+        <div class="panel p-6">
+          <h3 class="font-bold text-ink mb-3">Roles these skills open up</h3>
+          <div class="flex flex-wrap gap-2" id="roleChips"></div>
+          <p class="text-xs text-slate mt-4 leading-relaxed">These roles sit in corporate finance teams, Global Capability Centres (GCCs), shared-services centres, Big 4 advisory, banks, fintechs and startups.</p>
+        </div>
+        <div class="panel p-6">
+          <h3 class="font-bold text-ink mb-3">Included in every course</h3>
+          <ul class="grid sm:grid-cols-2 gap-2 text-sm text-slate">
+            <li>✅ Live sessions with Puneet</li><li>✅ Lab files &amp; practical datasets</li>
+            <li>✅ Assignments with feedback</li><li>✅ Real-world case studies</li>
+            <li>✅ Interview question bank</li><li>✅ Career &amp; CV guidance</li>
+            <li>✅ Mock interviews (paths)</li><li>✅ Certificate of completion</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINER -->
+<section id="trainer" class="py-16 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">FOUNDER &amp; LEAD MENTOR</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Puneet Bajaj: ex-Finance Director, 20+ years doing the work we teach</h2>
+      <p class="text-slate mt-3 text-sm leading-relaxed">A corporate finance leader, not an academic course designer. I owned the plan, the forecast and the CFO report for a $7B global business, built the systems and dashboards those teams ran on, and hired and trained the analysts doing that work every day. Now I'm passing those practical skills on.</p>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 space-y-3">
+        <details class="panel p-5" open>
+          <summary class="flex flex-wrap items-center justify-between gap-2"><div><div class="font-bold text-ink">Finance Leader: FP&amp;A, Planning Systems, Management Reporting &amp; Digital Finance</div><div class="text-sm text-cyd">Agilent Technologies · ~$7B global life sciences company</div></div><span class="mono text-xs text-slate">2025 – 2026</span></summary>
+          <ul class="mt-3 space-y-1.5 text-sm text-slate list-disc pl-5"><li>Led the annual operating plan, rolling forecasts and long-range plan; owned the monthly CFO reporting package for the Americas and Europe.</li><li>Led the FP&amp;A, Analytics &amp; Transformation pillar of the India Finance GCC.</li><li>Built the Revenue Control Tower on Power BI, Microsoft Fabric and Snowflake; ML forecasts with reported accuracy above 95%.</li></ul>
+        </details>
+        <details class="panel p-5">
+          <summary class="flex flex-wrap items-center justify-between gap-2"><div><div class="font-bold text-ink">Manager II: FP&amp;A, Business Intelligence &amp; Finance Systems</div><div class="text-sm text-em">Agilent Technologies</div></div><span class="mono text-xs text-slate">2020 – 2025</span></summary>
+          <ul class="mt-3 space-y-1.5 text-sm text-slate list-disc pl-5"><li>Led a global FP&amp;A and BI team covering close, forecasts, the annual plan and the long-range plan.</li><li>Built a Headcount Affordability model, scenario frameworks, cost allocation and price-volume-mix analytics.</li><li>Built <em>Ask Ana</em>, a GenAI finance chatbot (2022 Agilent India Innovates Award).</li></ul>
+        </details>
+        <details class="panel p-5">
+          <summary class="flex flex-wrap items-center justify-between gap-2"><div><div class="font-bold text-ink">Analytics, Reporting &amp; Planning roles</div><div class="text-sm text-slate">Agilent Technologies</div></div><span class="mono text-xs text-slate">2007 – 2020</span></summary>
+          <ul class="mt-3 space-y-1.5 text-sm text-slate list-disc pl-5"><li>Moved Finance from spreadsheets to self-service Power BI, Spotfire and Qlik.</li><li>Built the financial model behind an enterprise operating-margin program (2019 Agilent Global Innovates Award).</li><li>Administered Hyperion Essbase planning systems: cubes, hierarchies, load rules and calc scripts.</li></ul>
+        </details>
+        <details class="panel p-5">
+          <summary class="flex flex-wrap items-center justify-between gap-2"><div><div class="font-bold text-ink">Early career</div><div class="text-sm text-slate">American Express · Paras Buildtech</div></div><span class="mono text-xs text-slate">2005 – 2007</span></summary>
+          <ul class="mt-3 space-y-1.5 text-sm text-slate list-disc pl-5"><li>American Express: automated foreign-currency cash reconciliations for US International Banking with VBA (Functional Excellence Award).</li><li>Paras Buildtech: accounting, P&amp;L reporting, budgets and audits across group entities.</li></ul>
+        </details>
+      </div>
+      <div class="space-y-4">
+        <div class="panel p-5"><div class="font-bold text-ink text-sm mb-3">🌍 Global exposure</div><p class="text-sm text-slate leading-relaxed">Worked onsite in the USA and with finance teams and stakeholders across the UK, Europe and Asia-Pacific. Learners see how global finance teams actually operate, including the GCC model where many finance careers now start.</p></div>
+        <div class="panel p-5"><div class="font-bold text-ink text-sm mb-3">🏅 Recognition</div><ul class="text-sm text-slate space-y-1.5"><li>2023 Agilent Worldwide Group Innovates Award</li><li>2022 Agilent India Innovates Award (Ask Ana)</li><li>2019 Agilent Global Innovates Award</li><li>2015 CFO Club Award</li><li>2013 Employee of the Year, Pan-India</li><li>2006 American Express Functional Excellence Award</li></ul></div>
+        <div class="panel p-5"><div class="font-bold text-ink text-sm mb-3">🎓 Education</div><p class="text-sm text-slate leading-relaxed">MBA (Finance), AIMA · M.Com · B.Com, Delhi University · PGDIBO · Taxation &amp; Corporate Law · Advanced Diploma in Software Technology, CMC. <span class="text-ink">I started as a B.Com graduate too.</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="py-16 px-5 bg-mist border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-3xl mb-10">
+      <div class="mono text-xs text-cyd mb-2">PARTNER WITH ME</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">For coaching institutes, academies, colleges &amp; corporates</h2>
+      <p class="text-slate mt-3 text-sm leading-relaxed">You bring the learners, the brand or the platform. I bring an industry-built curriculum, live delivery and 20+ years of corporate finance credibility. Together we add a high-demand finance offering without you building it from scratch.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4" id="models"></div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-16 px-5">
+  <div class="max-w-4xl mx-auto">
+    <div class="mono text-xs text-cyd mb-2">FAQ</div>
+    <h2 class="text-3xl font-extrabold text-ink mb-8">Frequently asked questions</h2>
+    <div class="space-y-3" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact" class="py-16 px-5 bg-gradient-to-b from-mist to-paper border-t border-line">
+  <div class="max-w-4xl mx-auto text-center space-y-6">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-ink">Become job-ready with FinReady Academy</h2>
+    <p class="text-slate max-w-2xl mx-auto text-sm">Tell me what you're looking for: a course for yourself, training for your team, or a partnership. Every partnership can start with a free 90-minute masterclass.</p>
+    <div class="flex flex-wrap justify-center gap-2" id="contactAud">
+      <button class="chip active" data-s="Course enquiry">Join a course</button>
+      <button class="chip" data-s="Corporate / team training">Corporate / team training</button>
+      <button class="chip" data-s="Institute or academy partnership">Institute / academy partnership</button>
+      <button class="chip" data-s="Free masterclass request">Free masterclass</button>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a id="mailCta" href="#" class="inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto rounded-xl bg-cy text-white font-bold text-sm leading-none whitespace-nowrap hover:bg-cyd transition">✉️ bajajpuneetbajaj@gmail.com</a>
+      <a id="waCta" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto rounded-xl bg-em text-white font-bold text-sm leading-none whitespace-nowrap hover:opacity-90 transition">💬 WhatsApp</a>
+      <a href="tel:+919711166242" class="panel inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto !rounded-xl text-sm font-semibold text-ink leading-none whitespace-nowrap hover:border-cy transition">📞 +91-9711166242</a>
+      <a href="https://www.linkedin.com/in/puneetbajaj81" target="_blank" rel="noopener" class="panel inline-flex items-center justify-center gap-2 h-12 px-6 w-full sm:w-auto !rounded-xl text-sm font-semibold text-ink leading-none whitespace-nowrap hover:border-cy transition">in LinkedIn</a>
+    </div>
+        <div class="text-xs text-slate/70 pt-6">© 2026 FinReady Academy · Founded by Puneet Bajaj · Delhi NCR, India · Live online, on-site and hybrid. Demos use synthetic data for illustration only.</div>
+  </div>
+</footer>
+<script>
+/* ---------- reveal + counters ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const t=+el.dataset.count;let c=0;const step=Math.max(1,Math.ceil(t/40));
+  const iv=setInterval(()=>{c=Math.min(t,c+step);el.textContent=c.toLocaleString("en-IN");if(c>=t)clearInterval(iv)},30);
+});
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('#tabs .tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tabs .tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.add('hidden'));
+  document.getElementById(b.dataset.tab).classList.remove('hidden');
+  window.dispatchEvent(new Event('resize'));
+});
+
+Chart.defaults.color='#5A6782';Chart.defaults.font.family="'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif";
+const grid={color:'rgba(31,42,68,.08)'};
+
+/* ---------- TAB 1: Forecast lab ---------- */
+function rng(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+function genData(noiseLvl){
+  const r=rng(42),N=60,out=[];
+  const seas=[.94,.93,1.04,.96,.97,1.06,.95,.96,1.05,.97,.99,1.18];
+  for(let t=0;t<N;t++){
+    const base=100+1.1*t;const n=1+(r()-.5)*0.05*noiseLvl*2;
+    out.push(base*seas[t%12]*n);
+  }
+  return out;
+}
+const models={
+  naive:{name:'Naive (last value)',f:(tr,h)=>Array(h).fill(tr[tr.length-1])},
+  ma:{name:'Moving avg (3)',f:(tr,h)=>{const m=(tr.at(-1)+tr.at(-2)+tr.at(-3))/3;return Array(h).fill(m)}},
+  snaive:{name:'Seasonal naive',f:(tr,h)=>Array.from({length:h},(_,i)=>tr[tr.length-12+(i%12)])},
+  ts:{name:'Trend + seasonality',f:(tr,h)=>trendSeas(tr,h)},
+  ens:{name:'Ensemble (blend)',f:(tr,h)=>{const a=trendSeas(tr,h),b=models.snaive.f(tr,h);return a.map((v,i)=>.7*v+.3*b[i])}}
+};
+function trendSeas(tr,h){
+  const n=tr.length,xs=[...Array(n).keys()];
+  const mx=(n-1)/2,my=tr.reduce((a,b)=>a+b)/n;
+  let num=0,den=0;xs.forEach(x=>{num+=(x-mx)*(tr[x]-my);den+=(x-mx)**2});
+  const b=num/den,a=my-b*mx;
+  const idx=Array(12).fill(0),cnt=Array(12).fill(0);
+  xs.forEach(x=>{idx[x%12]+=tr[x]/(a+b*x);cnt[x%12]++});
+  const si=idx.map((v,i)=>v/cnt[i]);
+  return Array.from({length:h},(_,i)=>(a+b*(n+i))*si[(n+i)%12]);
+}
+const mape=(a,f)=>a.reduce((s,v,i)=>s+Math.abs((v-f[i])/v),0)/a.length*100;
+let selModel='ens',fcChart;
+const labels=Array.from({length:60},(_,i)=>{const d=new Date(2022,i,1);return d.toLocaleString('en',{month:'short'})+' '+String(d.getFullYear()).slice(2)});
+const mc=document.getElementById('modelChips');
+Object.entries(models).forEach(([k,m])=>{const b=document.createElement('button');b.className='chip'+(k===selModel?' active':'');b.textContent=m.name;b.onclick=()=>{selModel=k;mc.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));b.classList.add('active');updateFc()};mc.appendChild(b)});
+function updateFc(){
+  const h=+document.getElementById('hor').value,nl=+document.getElementById('noise').value;
+  document.getElementById('hVal').textContent=h+' months';
+  document.getElementById('nVal').textContent=['Low','Medium','High'][nl-1];
+  const d=genData(nl),tr=d.slice(0,d.length-h),te=d.slice(d.length-h);
+  const res=Object.entries(models).map(([k,m])=>{const f=m.f(tr,h);return{k,name:m.name,f,mape:mape(te,f)}});
+  const sel=res.find(r=>r.k===selModel);
+  document.getElementById('accOut').textContent=(100-sel.mape).toFixed(1)+'%';
+  document.getElementById('mapeOut').textContent='MAPE '+sel.mape.toFixed(2)+'% on '+h+'-month hold-out';
+  const sorted=[...res].sort((a,b)=>a.mape-b.mape);
+  document.getElementById('board').innerHTML=sorted.map((r,i)=>`<div class="flex items-center gap-2 text-xs"><span class="w-4 text-slate/80 mono">${i+1}</span><span class="w-32 truncate ${r.k===selModel?'text-cyd font-semibold':'text-slate'}">${r.name}</span><div class="flex-1 h-2 bg-paper rounded"><div class="h-2 rounded ${i===0?'bg-em':'bg-cy/60'}" style="width:${Math.max(4,100-r.mape*3)}%"></div></div><span class="mono text-slate w-12 text-right">${(100-r.mape).toFixed(1)}%</span></div>`).join('');
+  const split=d.length-h;
+  const fArr=Array(d.length).fill(null);sel.f.forEach((v,i)=>fArr[split+i]=v);
+  const aHist=d.map((v,i)=>i<split?v:null);
+  const aTest=d.map((v,i)=>i>=split-1?v:null);
+  const cfg={labels,datasets:[
+    {label:'History (train)',data:aHist,borderColor:'#9AA4BA',pointRadius:0,borderWidth:2,tension:.3},
+    {label:'Actual (hold-out)',data:aTest,borderColor:'#4E9A86',pointRadius:3,borderWidth:2,tension:.3},
+    {label:'Forecast – '+models[selModel].name,data:fArr,borderColor:'#5B6CD6',borderDash:[6,4],pointRadius:3,borderWidth:2.5,tension:.3}]};
+  if(!fcChart){fcChart=new Chart(document.getElementById('fcChart'),{type:'line',data:cfg,options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:12}}},scales:{x:{grid,ticks:{maxTicksLimit:10}},y:{grid,title:{display:true,text:'Revenue index'}}}}})}
+  else{fcChart.data=cfg;fcChart.update()}
+}
+['hor','noise'].forEach(id=>document.getElementById(id).oninput=updateFc);
+updateFc();
+
+/* ---------- TAB 2: Ask Ana ---------- */
+const Q=['Q1','Q2','Q3','Q4'];
+const D={
+  'Instruments':{rev:[210,225,238,262],plan:[215,226,245,258],gm:[52.1,52.8,51.9,53.4],gmp:[52.5,52.5,53,53]},
+  'Consumables & Services':{rev:[330,338,352,365],plan:[322,335,350,358],gm:[63.2,63.5,64.1,64.4],gmp:[63,63,63.5,64]},
+  'Software & Informatics':{rev:[60,66,71,79],plan:[62,67,72,78],gm:[74.2,74.8,75.1,75.9],gmp:[74,74.5,75,75.5]}
+};
+const OPEX={act:[205,209,214,226],plan:[204,208,215,222]};
+const sum=(f)=>Q.map((_,i)=>Object.values(D).reduce((s,x)=>s+f(x)[i],0));
+const REV=sum(x=>x.rev),PLAN=sum(x=>x.plan);
+const GP=Q.map((_,i)=>Object.values(D).reduce((s,x)=>s+x.rev[i]*x.gm[i]/100,0));
+const GPP=Q.map((_,i)=>Object.values(D).reduce((s,x)=>s+x.plan[i]*x.gmp[i]/100,0));
+const OI=GP.map((g,i)=>g-OPEX.act[i]),OIP=GPP.map((g,i)=>g-OPEX.plan[i]);
+const f1=v=>v.toFixed(1),pct=v=>v.toFixed(1)+'%',sgn=v=>(v>=0?'+':'')+v.toFixed(1);
+function qOf(s){const m=s.match(/q([1-4])/i);return m?+m[1]-1:null}
+function table(rows,head){return `<div class="overflow-x-auto mt-2"><table class="w-full text-xs"><thead><tr class="text-slate text-left">${head.map(h=>`<th class="py-1 pr-3 font-medium">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr class="border-t border-line">${r.map((c,i)=>`<td class="py-1 pr-3 ${i?'mono':''} text-ink">${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+function answer(q){
+  const s=q.toLowerCase(),qi=qOf(s)??3,qn=Q[qi];
+  const seg=Object.keys(D).find(k=>s.includes(k.split(' ')[0].toLowerCase()));
+  if(/forecast|guidance|outlook|predict/.test(s)){
+    const h=REV.slice(0,3),fc=trendSeasSimple(REV);
+    return `Using a simple trend on the first three quarters, the model points to roughly <b>$${f1(fc)}M</b> for Q4 revenue vs. an actual/plan of $${f1(REV[3])}M / $${f1(PLAN[3])}M in this sample. In production, Ask Ana pulls the ML forecast and flags guidance risk by driver.`;
+  }
+  if(/headcount|opex|expense|cost/.test(s)){
+    return `<b>Opex ${qn}:</b> $${OPEX.act[qi]}M vs plan $${OPEX.plan[qi]}M (${sgn(OPEX.act[qi]-OPEX.plan[qi])}M, ${pct(OPEX.act[qi]/REV[qi]*100)} of revenue). `+(OPEX.act[qi]>OPEX.plan[qi]?'Spend is running above plan, so it is worth checking hiring timing and variable comp.':'Spend is at or below plan.');
+  }
+  if(/operating margin|op margin|operating income|\boi\b|profit/.test(s)){
+    return `<b>Operating income ${qn}:</b> $${f1(OI[qi])}M (${pct(OI[qi]/REV[qi]*100)} margin) vs plan $${f1(OIP[qi])}M (${pct(OIP[qi]/PLAN[qi]*100)}). Variance ${sgn(OI[qi]-OIP[qi])}M.`+table(Q.map((x,i)=>[x,f1(OI[i]),f1(OIP[i]),pct(OI[i]/REV[i]*100)]),['Qtr','OI $M','Plan $M','OM %']);
+  }
+  if(/gross margin|\bgm\b|margin/.test(s)){
+    if(seg){const x=D[seg];return `<b>${seg} gross margin ${qn}:</b> ${pct(x.gm[qi])} vs plan ${pct(x.gmp[qi])} (${sgn(x.gm[qi]-x.gmp[qi])} pts).`}
+    const gm=GP[qi]/REV[qi]*100,gmp=GPP[qi]/PLAN[qi]*100;
+    const rows=Object.entries(D).map(([k,x])=>[k,pct(x.gm[qi]),pct(x.gmp[qi]),sgn(x.gm[qi]-x.gmp[qi])]);
+    return `<b>Total gross margin ${qn}:</b> ${pct(gm)} vs plan ${pct(gmp)} (${sgn(gm-gmp)} pts). Segment mix and Instruments pricing are the main drivers in this sample.`+table(rows,['Segment','Actual','Plan','Δ pts']);
+  }
+  if(/best|worst|top|lagging|underperform|miss/.test(s)){
+    const rows=Object.entries(D).map(([k,x])=>[k,f1(x.rev[qi]),f1(x.plan[qi]),sgn(x.rev[qi]-x.plan[qi])]).sort((a,b)=>b[3]-a[3]);
+    return `For ${qn}, <b>${rows[0][0]}</b> is furthest ahead of plan and <b>${rows[rows.length-1][0]}</b> is the weakest.`+table(rows,['Segment','Rev $M','Plan $M','Var $M']);
+  }
+  if(/revenue|sales|variance|plan|vs/.test(s)||seg){
+    if(seg){const x=D[seg];return `<b>${seg} ${qn}:</b> revenue $${x.rev[qi]}M vs plan $${x.plan[qi]}M (${sgn(x.rev[qi]-x.plan[qi])}M, ${pct((x.rev[qi]/x.plan[qi]-1)*100)}).`}
+    const rows=Object.entries(D).map(([k,x])=>[k,f1(x.rev[qi]),f1(x.plan[qi]),sgn(x.rev[qi]-x.plan[qi])]);
+    return `<b>Total revenue ${qn}:</b> $${f1(REV[qi])}M vs plan $${f1(PLAN[qi])}M (${sgn(REV[qi]-PLAN[qi])}M, ${pct((REV[qi]/PLAN[qi]-1)*100)}).`+table(rows,['Segment','Rev $M','Plan $M','Var $M']);
+  }
+  return `I can answer questions on <b>revenue, gross margin, operating income, opex, segment performance and forecast</b> for Q1–Q4 in this sample dataset. Try one of the suggestions on the right.`;
+}
+function trendSeasSimple(a){const n=3,d=(a[2]-a[0])/2;return a[2]+d}
+const chat=document.getElementById('chat');
+function add(role,html){const d=document.createElement('div');d.className='flex '+(role==='u'?'justify-end':'');d.innerHTML=`<div class="${role==='u'?'msg-user':'msg-bot'} px-4 py-3 max-w-[88%] leading-relaxed">${html}</div>`;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+function ask(q){
+  if(!q.trim())return;add('u',q.replace(/</g,'&lt;'));
+  const t=add('b','<span class="dot">●</span> <span class="dot" style="animation-delay:.2s">●</span> <span class="dot" style="animation-delay:.4s">●</span>');
+  setTimeout(()=>{t.remove();add('b',answer(q))},550);
+}
+add('b','Hi, I\'m <b>Ana</b>, a demo of the GenAI finance assistant Puneet built. Ask me about the sample P&L below (synthetic data).');
+document.getElementById('chatForm').onsubmit=e=>{e.preventDefault();const i=document.getElementById('chatIn');ask(i.value);i.value=''};
+['What was total revenue vs plan in Q3?','Why did gross margin miss plan in Q1?','Which segment is lagging in Q2?','Show operating income by quarter','How is opex trending in Q4?','What is the Q4 forecast?'].forEach(p=>{const b=document.createElement('button');b.className='chip text-left';b.textContent=p;b.onclick=()=>ask(p);document.getElementById('suggest').appendChild(b)});
+
+/* ---------- TAB 3: Bridge ---------- */
+let bridge;
+const $=id=>document.getElementById(id);
+function updateBridge(){
+  const rev=+$('rev').value,gm=+$('gm').value,ox=+$('ox').value,tm=+$('tm').value,lc=+$('lc').value,pr=+$('pr').value,vo=+$('vo').value,fx=+$('fx').value;
+  $('rVal').textContent='$'+rev+'M';$('gmVal').textContent=gm+'%';$('oxVal').textContent=ox+'%';$('tmVal').textContent=tm+'%';$('lcVal').textContent='$'+lc+'K';
+  $('pVal').textContent=sgn(pr)+'%';$('vVal').textContent=sgn(vo)+'%';$('fVal').textContent=sgn(fx)+'%';
+  const gp=rev*gm/100,opex=rev*ox/100,oi=gp-opex,om=oi/rev*100;
+  const affordOpex=rev*(gm-tm)/100,headroom=affordOpex-opex,heads=Math.round(headroom*1000/lc);
+  // bridge
+  const price=rev*pr/100;                     // price drops through ~100%
+  const vol=rev*vo/100*gm/100;                // volume at GM
+  const fxI=rev*fx/100*0.6;                   // FX partial offset
+  const opexVar=-opex*0.01*(vo<0?-0.5:0.5)*0;  // keep opex at plan in bridge for clarity
+  const out=oi+price+vol+fxI;
+  const steps=[['Plan OI',oi,'t'],['Price',price],['Volume',vol],['FX',fxI],['Outlook OI',out,'t']];
+  let run=0;const bars=[],cols=[];
+  steps.forEach(s=>{if(s[2]==='t'){bars.push([0,s[1]]);cols.push('#5B6CD6');run=s[1]}else{bars.push([run,run+s[1]]);cols.push(s[1]>=0?'#4E9A86':'#D0607A');run+=s[1]}});
+  const data={labels:steps.map(s=>s[0]),datasets:[{data:bars,backgroundColor:cols,borderRadius:6}]};
+  if(!bridge){bridge=new Chart($('bridgeChart'),{type:'bar',data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const v=c.raw;return '$'+(v[1]-v[0]).toFixed(1)+'M'}}}},scales:{x:{grid:{display:false}},y:{grid,title:{display:true,text:'$M'}}}}})}
+  else{bridge.data=data;bridge.update()}
+  const ok=headroom>=0;
+  $('kpiRow').innerHTML=`
+   <div class="panel p-4"><div class="text-xs text-slate">Operating margin (plan)</div><div class="text-2xl font-extrabold ${om>=tm?'text-em':'text-am'}">${om.toFixed(1)}%</div><div class="text-[11px] text-slate/80">target ${tm}%</div></div>
+   <div class="panel p-4"><div class="text-xs text-slate">Opex headroom to target</div><div class="text-2xl font-extrabold ${ok?'text-em':'text-rose'}">${headroom>=0?'+':''}$${headroom.toFixed(1)}M</div><div class="text-[11px] text-slate/80">affordable opex $${affordOpex.toFixed(1)}M</div></div>
+   <div class="panel p-4"><div class="text-xs text-slate">Affordable headcount ${ok?'adds':'reduction'}</div><div class="text-2xl font-extrabold ${ok?'text-cyd':'text-rose'}">${heads>=0?'+':''}${heads}</div><div class="text-[11px] text-slate/80">at $${lc}K loaded cost</div></div>`;
+  const delta=out-oi;
+  $('insight').innerHTML=`<span class="text-cyd font-semibold">Read-out:</span> At $${rev}M revenue and ${gm}% gross margin, holding opex at ${ox}% yields ${om.toFixed(1)}% operating margin: ${ok?`<b class="text-em">${Math.abs(heads)} heads of capacity</b> above the ${tm}% target`:`<b class="text-rose">${Math.abs(heads)} heads over</b> what the ${tm}% target can afford`}. Combined price, volume and FX moves change operating income by <b>${delta>=0?'+':''}$${delta.toFixed(1)}M</b> (${(delta/rev*100).toFixed(1)} pts of revenue), so I'd ${delta<0?'hold hiring until the shortfall is covered by mix or cost actions':'phase hiring to the upside while watching volume risk'}.`;
+}
+['rev','gm','ox','tm','lc','pr','vo','fx'].forEach(id=>$(id).oninput=updateBridge);
+updateBridge();
+
+/* ---------- TAB 4: Month tracker ---------- */
+const CT_DAYS=[];(()=>{const d=new Date(2026,9,1);while(d.getMonth()===9){const w=d.getDay();if(w&&w<6)CT_DAYS.push(d.getDate());d.setDate(d.getDate()+1)}})();
+const CT_N=CT_DAYS.length,CT_OPEN=600;
+const CT_LBL=CT_DAYS.map(x=>'Oct '+x);
+const CT=(()=>{
+  const r=rng(7);
+  const shape=CT_DAYS.map((_,i)=>0.75+0.5*Math.pow(i/(CT_N-1),1.6));
+  const norm=tot=>{const z=shape.reduce((a,b)=>a+b);return shape.map(x=>x/z*tot)};
+  const oF=norm(260),sF=norm(245),rF=norm(240);
+  const mk=(F,b)=>F.map((v,i)=>v*(1+b[0]+(b[1]-b[0])*i/(CT_N-1)+(r()-.5)*.12));
+  return{oF,sF,rF,oA:mk(oF,[.04,.03]),sA:mk(sF,[-.01,-.07]),rA:mk(rF,[-.005,-.045])};
+})();
+const CT_M={
+  orders:{name:'Orders',F:CT.oF,A:CT.oA},
+  revenue:{name:'Revenue',F:CT.rF,A:CT.rA},
+  shipments:{name:'Shipments',F:CT.sF,A:CT.sA},
+  backlog:{name:'Backlog',F:CT.oF.map((v,i)=>v-CT.sF[i]),A:CT.oA.map((v,i)=>v-CT.sA[i]),level:true}
+};
+let ctSel='revenue',ctView='cum',ctChart;
+const ctSum=(a,n)=>{let s=0;for(let i=0;i<n;i++)s+=a[i];return s};
+const ctM=v=>'$'+Math.abs(v).toFixed(1)+'M';
+function ctProj(key,t,e){
+  if(key==='backlog'){const o=ctProj('orders',t,e),s=ctProj('shipments',t,e);return o.map((v,i)=>i<t?null:v-s[i])}
+  const m=CT_M[key],p=ctSum(m.A,t)/ctSum(m.F,t),ef=key==='orders'?0:e;
+  return m.F.map((v,i)=>i<t?null:v*p*(1+ef));
+}
+function ctStat(key,t,e){
+  const m=CT_M[key],P=ctProj(key,t,e),off=m.level?CT_OPEN:0;
+  const mtdA=ctSum(m.A,t),mtdF=ctSum(m.F,t),monthF=ctSum(m.F,CT_N);
+  const rem=P.reduce((s,v)=>s+(v||0),0);
+  const curA=off+mtdA,curF=off+mtdF,endF=off+monthF,land=off+mtdA+rem;
+  return{P,mtdA,mtdF,monthF,curA,curF,endF,land,vr:(curA/curF-1)*100,lv:(land/endF-1)*100};
+}
+function ctColor(v){return v>2?'#4E9A86':v<-2?'#D0607A':'#D9893B'}
+function ctInsights(t,e){
+  const S={},S0={};Object.keys(CT_M).forEach(k=>{S[k]=ctStat(k,t,e);S0[k]=ctStat(k,t,0)});
+  const rd=CT_N-t,out=[],r=S.revenue,gap=r.land-r.endF;
+  const reqD=rd>0?(r.monthF-r.mtdA)/rd:0,curD=r.mtdA/t;
+  if(gap<-r.endF*.01) out.push({sev:'risk',tag:'Revenue',title:'Revenue pacing '+ctM(gap)+' below forecast',body:'Landing ≈ '+ctM(r.land)+' vs '+ctM(r.endF)+' forecast ('+sgn(r.lv)+'%). '+(rd>0?'Remaining '+rd+' days need '+ctM(reqD)+'/day vs '+ctM(curD)+'/day averaged so far.':'Month is complete.'),act:'Rank open orders by revenue value and ship/invoice the largest first; confirm installation and acceptance milestones that gate recognition.'});
+  else if(gap>r.endF*.01) out.push({sev:'good',tag:'Revenue',title:'Revenue pacing '+ctM(gap)+' above forecast',body:'Landing ≈ '+ctM(r.land)+' vs '+ctM(r.endF)+' forecast ('+sgn(r.lv)+'%).',act:'Confirm the upside is repeatable (not pull-forward) before raising guidance; protect delivery commitments.'});
+  else out.push({sev:'watch',tag:'Revenue',title:'Revenue on track to forecast',body:'Landing ≈ '+ctM(r.land)+' vs '+ctM(r.endF)+' ('+sgn(r.lv)+'%).',act:'Hold the line; watch back-end loading in the final days.'});
+  const ov=S.orders.vr,sv=S.shipments.vr,bl=S.backlog.curA-S.backlog.curF;
+  if(ov>2&&sv<-2) out.push({sev:'risk',tag:'Orders vs shipments',title:'Demand ahead, execution behind',body:'Orders are '+sgn(ov)+'% vs forecast but shipments are '+sgn(sv)+'%, so backlog sits '+ctM(bl)+' above plan.',act:'Release blocked orders, add shift or logistics capacity, and expedite the top lines; review supply constraints with Operations.'});
+  else if(ov<-2) out.push({sev:'watch',tag:'Orders',title:'Order intake lagging forecast',body:'Orders are '+sgn(ov)+'% vs forecast MTD (landing '+sgn(S.orders.lv)+'%). Shortfall hits next month revenue via backlog.',act:'Review pipeline conversion, discounting and late-stage deals with Sales finance; refresh next-month shipment outlook.'});
+  else if(sv<-2) out.push({sev:'watch',tag:'Shipments',title:'Shipments behind forecast',body:'Shipments are '+sgn(sv)+'% vs forecast MTD while orders are '+sgn(ov)+'%.',act:'Check for blocked orders, supplier delays and logistics bottlenecks.'});
+  else out.push({sev:'good',tag:'Orders & shipments',title:'Orders and shipments in line',body:'Orders '+sgn(ov)+'%, shipments '+sgn(sv)+'% vs forecast MTD.',act:'No intervention needed; continue daily monitoring.'});
+  const cov=S.backlog.curA/(S.shipments.mtdA/t),covF=S.backlog.curF/(S.shipments.mtdF/t);
+  if(cov>covF*1.08) out.push({sev:'watch',tag:'Backlog',title:'Backlog cover is deeper than planned',body:'Backlog covers ≈ '+cov.toFixed(0)+' days of shipments vs '+covF.toFixed(0)+' planned. Next-month revenue is supported; the constraint is execution, not demand.',act:'Prioritize capacity and component availability; sequence builds by value and customer commitment.'});
+  else if(cov<covF*.92) out.push({sev:'risk',tag:'Backlog',title:'Backlog cover thinner than planned',body:'Backlog covers ≈ '+cov.toFixed(0)+' days of shipments vs '+covF.toFixed(0)+' planned, a risk to next-month revenue.',act:'Accelerate order conversion; assess whether the guidance range still holds for next period.'});
+  else out.push({sev:'good',tag:'Backlog',title:'Backlog coverage healthy',body:'Backlog covers ≈ '+cov.toFixed(0)+' days of shipments vs '+covF.toFixed(0)+' planned.',act:'Maintain build plan and monitor blocked orders.'});
+  if(t>=3){
+    const la=ctSum(CT_M.revenue.A.slice(t-3),3)-ctSum(CT_M.revenue.A.slice(t-3),0),
+          a3=CT_M.revenue.A.slice(t-3,t).reduce((x,y)=>x+y,0),f3=CT_M.revenue.F.slice(t-3,t).reduce((x,y)=>x+y,0),mv=(a3/f3-1)*100;
+    out.push({sev:mv<-2?'risk':mv>2?'good':'watch',tag:'Momentum',title:'Last 3 days revenue '+sgn(mv)+'% vs daily forecast',body:mv<-2?'Run-rate is deteriorating versus the plan curve, so the gap is likely to widen without action.':mv>2?'Recent run-rate is improving versus plan, helping close any MTD gap.':'Run-rate is tracking the plan curve.',act:mv<-2?'Escalate daily: owners for top at-risk shipments and a same-week recovery plan.':'Keep daily review cadence through month-end.'});
+  }
+  const lift=S.revenue.land-S0.revenue.land;
+  if(e>0) out.push({sev:'good',tag:'Scenario',title:'Expedite lever adds '+ctM(lift),body:'At +'+(e*100).toFixed(0)+'% on remaining shipments and revenue, landing moves to '+ctM(S.revenue.land)+(gap<0?', closing '+Math.min(100,Math.round(lift/Math.abs(S0.revenue.land-S0.revenue.endF)*100))+'% of the gap vs forecast.':'.'),act:'Validate capacity and cost of expediting (freight, overtime) before committing.'});
+  else if(gap<0) out.push({sev:'watch',tag:'Scenario',title:'Size the recovery',body:'Use the expedite slider to test how much of the '+ctM(gap)+' gap can be closed by pulling forward shipments.',act:'Agree the lever and owner with Operations.'});
+  const rank={risk:0,watch:1,good:2};out.sort((a,b)=>rank[a.sev]-rank[b.sev]);
+  return{out,S,rd,gap};
+}
+function ctRender(){
+  const t=+$('ctDay').value,e=+$('ctExp').value/100,key=ctSel,m=CT_M[key],st=ctStat(key,t,e),off=m.level?CT_OPEN:0;
+  $('ctDayVal').textContent=CT_LBL[t-1]+' · day '+t+' of '+CT_N;
+  $('ctBar').style.width=(t/CT_N*100)+'%';
+  $('ctExpVal').textContent=e?'+'+(e*100).toFixed(0)+'%':'off';
+  // KPI cards
+  $('ctKpis').innerHTML=Object.keys(CT_M).map(k=>{
+    const s=ctStat(k,t,e),mm=CT_M[k],c=mm.level?(Math.abs(s.vr)>3?'#D9893B':'#4E9A86'):ctColor(s.vr),cl=mm.level?(Math.abs(s.lv)>3?'#D9893B':'#4E9A86'):ctColor(s.lv);
+    return `<div class="panel p-4 cursor-pointer transition ${k===key?'border-cy':''}" style="${k===key?'border-color:#5B6CD6':''}" data-k="${k}">
+      <div class="flex justify-between text-xs text-slate"><span>${mm.name}${mm.level?' (level)':' MTD'}</span><span class="mono" style="color:${c}">${sgn(s.vr)}% vs fcst</span></div>
+      <div class="text-2xl font-extrabold text-ink mt-1">$${s.curA.toFixed(1)}M</div>
+      <div class="text-[11px] text-slate/80 mono">forecast $${s.curF.toFixed(1)}M</div>
+      <div class="text-xs mt-2 border-t border-line pt-2 text-slate">${mm.level?'Month-end':'Landing'} <span class="text-ink font-semibold">$${s.land.toFixed(1)}M</span> <span style="color:${cl}">(${sgn(s.lv)}% vs $${s.endF.toFixed(1)}M)</span></div></div>`}).join('');
+  document.querySelectorAll('#ctKpis [data-k]').forEach(el=>el.onclick=()=>{ctSel=el.dataset.k;ctRender()});
+  // chart
+  $('ctTitle').textContent=m.name+' · '+(ctView==='cum'?(m.level?'daily backlog level':'cumulative month-to-date'):(m.level?'daily net change (orders − shipments)':'daily'))+' vs forecast ($M)';
+  let datasets;
+  if(ctView==='cum'){
+    let c=off;const fC=m.F.map(v=>(c+=v));
+    c=off;const aC=m.A.map((v,i)=>i<t?(c+=v):null);
+    const pC=Array(CT_N).fill(null);pC[t-1]=aC[t-1];let run=aC[t-1];for(let i=t;i<CT_N;i++){run+=st.P[i];pC[i]=run}
+    datasets=[
+      {label:'Forecast',data:fC,borderColor:'#9AA4BA',borderWidth:2,pointRadius:0,tension:.25,type:'line'},
+      {label:'Actual',data:aC,borderColor:'#5B6CD6',backgroundColor:'rgba(91,108,214,.15)',fill:true,borderWidth:3,pointRadius:2,tension:.25,type:'line'},
+      {label:e?'Projection (with lever)':'Projection (current pace)',data:pC,borderColor:'#D9893B',borderDash:[6,4],borderWidth:2.5,pointRadius:0,tension:.25,type:'line'}];
+  }else{
+    const aD=m.A.map((v,i)=>i<t?v:null),pD=st.P.map(v=>v===null?null:v);
+    datasets=[
+      {label:'Actual',data:aD,backgroundColor:'rgba(91,108,214,.85)',borderRadius:4,type:'bar'},
+      {label:'Projected',data:pD,backgroundColor:'rgba(217,137,59,.35)',borderRadius:4,type:'bar'},
+      {label:'Forecast',data:m.F,borderColor:'#9AA4BA',borderWidth:2,pointRadius:2,tension:.2,type:'line'}];
+  }
+  const cfg={labels:CT_LBL,datasets};
+  if(ctChart)ctChart.destroy();
+  ctChart=new Chart($('ctChart'),{data:cfg,options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': $'+(c.raw===null?'–':c.raw.toFixed(1))+'M'}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:11}},y:{grid,title:{display:true,text:'$M'}}}}});
+  // heat strip
+  $('ctHeatTitle').textContent='Daily variance vs forecast · '+m.name+(m.level?' (level)':'')+' · tap-hover a cell for detail';
+  let cA=off,cF=off;
+  $('ctHeat').innerHTML=CT_LBL.map((l,i)=>{
+    if(i>=t)return `<div class="flex-1 h-8 rounded bg-paper border border-line" title="${l}: upcoming"></div>`;
+    cA+=m.A[i];cF+=m.F[i];
+    const v=m.level?(cA/cF-1)*100:(m.A[i]/m.F[i]-1)*100;
+    return `<div class="flex-1 h-8 rounded" style="background:${ctColor(v)};opacity:${Math.min(1,.45+Math.abs(v)/12)}" title="${l}: ${sgn(v)}% vs forecast"></div>`}).join('');
+  // insights
+  const I=ctInsights(t,e),cs={risk:['#D0607A','RISK'],watch:['#D9893B','WATCH'],good:['#4E9A86','ON TRACK']};
+  const nr=I.out.filter(x=>x.sev==='risk').length;
+  $('ctInsTag').textContent=CT_LBL[t-1]+' · '+nr+' risk'+(nr===1?'':'s')+' flagged';
+  $('ctInsights').innerHTML=I.out.map(x=>`<div class="panel p-5 space-y-2" style="border-left:3px solid ${cs[x.sev][0]}">
+    <div class="flex justify-between items-center"><span class="text-[11px] mono text-slate">${x.tag}</span><span class="text-[10px] font-bold px-2 py-0.5 rounded" style="color:${cs[x.sev][0]};background:${cs[x.sev][0]}22">${cs[x.sev][1]}</span></div>
+    <div class="text-ink font-semibold text-sm">${x.title}</div>
+    <div class="text-xs text-slate leading-relaxed">${x.body}</div>
+    <div class="text-xs text-ink leading-relaxed pt-2 border-t border-line"><span class="text-cyd font-semibold">Action:</span> ${x.act}</div></div>`).join('');
+  window.ctSummary=CT_LBL[t-1]+' (day '+t+'/'+CT_N+') synthetic demo: '+I.out.map(x=>'['+cs[x.sev][1]+'] '+x.title+'. '+x.act).join(' ');
+}
+document.querySelectorAll('#ctViewChips .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ctViewChips .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');ctView=b.dataset.v;ctRender()});
+$('ctDay').oninput=ctRender;$('ctExp').oninput=ctRender;
+$('ctCopy').onclick=()=>{try{navigator.clipboard.writeText(window.ctSummary);$('ctCopy').textContent='Copied ✓';setTimeout(()=>$('ctCopy').textContent='Copy CFO summary',1500)}catch(_){}};
+$('ctDay').value=CT_DAYS.indexOf(20)+1||14;
+ctRender();
+
+/* =================== NEW: shared helpers =================== */
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fmt=(v,d=1)=>v.toLocaleString('en-IN',{minimumFractionDigits:d,maximumFractionDigits:d});
+const inr=v=>'₹'+Math.round(v).toLocaleString('en-IN');
+function tbl(head,rows,opts={}){
+  const num=opts.num||[],nc=opts.newcol??-1,hl=opts.hl||(()=>false);
+  return `<table class="tbl"><thead><tr>${head.map((h,i)=>`<th class="${num.includes(i)?'num':''}">${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r,ri)=>`<tr class="${hl(r,ri)?'hl':''}">${r.map((c,i)=>`<td class="${num.includes(i)?'num':''} ${i===nc?'newcol':''}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function slider(id,label,min,max,step,val,fmtFn){
+  return `<div><div class="flex justify-between text-xs text-slate"><span>${label}</span><span class="mono text-cyd" id="${id}V"></span></div><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}" data-f="${fmtFn}"></div>`;
+}
+const F={pct:v=>v+'%',cr:v=>'₹'+v+' Cr',x:v=>v,inr:v=>inr(+v),n:v=>v,lk:v=>'₹'+v+' L'};
+function bindSliders(ids,cb){ids.forEach(id=>{const el=$(id);const up=()=>{$(id+'V').textContent=F[el.dataset.f](el.value)};el.addEventListener('input',()=>{up();cb()});up()})}
+
+
+/* =================== HERO can-do list =================== */
+$('canDo').innerHTML=[['📗','Automate a monthly variance report with Excel, VBA &amp; AI'],['📊','Build a CFO dashboard in Power BI with DAX'],['🗄️','Pull and validate finance data with SQL'],['💹','Build a budget, forecast and DCF model you can defend'],['🎤','Clear technical &amp; case interview rounds with confidence']].map(x=>`<li class="flex gap-3 items-start"><span class="w-7 h-7 shrink-0 rounded-lg bg-paper border border-line flex items-center justify-center text-sm">${x[0]}</span><span class="pt-0.5">${x[1]}</span></li>`).join('');
+
+/* =================== WHO + FORMATS =================== */
+const WHO=[
+ ['🎓','Students & fresh graduates','B.Com, BBA, BMS, M.Com, MBA, PGDM, CA / CMA aspirants. Turn your degree into job-ready skills and a portfolio before you apply.','Course enquiry','Explore courses'],
+ ['💼','Working professionals','Accountants and analysts moving into FP&A, BI or finance analytics, or anyone who wants to automate their reporting with Excel VBA, Power BI and AI.','Course enquiry','Upskill now'],
+ ['🏫','Coaching institutes & academies','Add a premium, industry-led finance program to your offering with co-branded certification and revenue sharing, and no faculty hiring.','Institute or academy partnership','Partner with me'],
+ ['🏛️','Colleges & universities','Value-added and skill courses, placement bootcamps and faculty development that fit your academic calendar.','Institute or academy partnership','Bring it to campus'],
+ ['🏢','Corporates & GCC finance teams','Power BI, AI for Finance, FP&A and automation workshops tailored to your team\'s data, tools and month-end calendar.','Corporate / team training','Plan team training'],
+ ['🧑‍🏫','Faculty & trainers','Train-the-trainer programs for college faculty and finance trainers who want to teach Power BI, FP&A and AI for Finance with real business cases.','Institute or academy partnership','Upskill your faculty']
+];
+$('whoCards').innerHTML=WHO.map(w=>`<div class="panel p-6 flex flex-col gap-3 hover:border-cy/50 transition"><div class="text-3xl">${w[0]}</div><div class="font-bold text-ink">${w[1]}</div><p class="text-sm text-slate leading-relaxed">${w[2]}</p><a href="#contact" data-subj="${w[3]}" class="subjLink mt-auto text-sm font-semibold text-cyd hover:underline">${w[4]} →</a></div>`).join('');
+const FORMATS=[
+ ['Live online cohorts','Weekend or weekday batches with live classes, recordings, assignments and feedback.','Students · professionals'],
+ ['Fast-track bootcamps','Intensive 4–6 week programs focused on tools, case studies and interview readiness.','Job seekers · placement season'],
+ ['Corporate workshops','1–3 day hands-on workshops on your team\'s own reporting challenges, on-site or virtual.','Finance teams · GCCs'],
+ ['Institute & academy programs','Co-branded certification or semester courses delivered on your campus or online.','Institutes · colleges · academies'],
+ ['Masterclasses & webinars','90-minute sessions on Power BI, AI for Finance or cracking finance interviews.','Any audience · great first step'],
+ ['1:1 mentoring','Career guidance, CV and portfolio review, and mock interviews with a hiring manager\'s eye.','Individuals']
+];
+$('formatCards').innerHTML=FORMATS.map((f,i)=>`<div class="panel p-5 flex flex-col gap-2" style="border-top:3px solid ${['#5B6CD6','#4E9A86','#D9893B','#8E7CC3','#D0607A','#3A47A8'][i]}"><div class="font-bold text-ink text-sm">${f[0]}</div><p class="text-xs text-slate leading-relaxed">${f[1]}</p><div class="mt-auto pt-2 text-[11px] mono text-slate/80">${f[2]}</div></div>`).join('');
+
+/* =================== GAP =================== */
+const GAP=[
+ ['Accounting standards and journal entries in theory','Month-end close: accruals, reconciliations and checks in Excel against a deadline'],
+ ['Ratio formulas and textbook budgeting','Budget vs actual variance analysis with clear commentary for the CFO'],
+ ['Basic Excel: SUM, simple charts','XLOOKUP, SUMIFS, pivots, Power Query, VBA macros and AI copilots'],
+ ['MIS as a concept','Power BI dashboards with DAX that leadership uses every week'],
+ ['Rarely covered','SQL to pull and validate finance data from databases and ERPs'],
+ ['Valuation theory','A working 3-statement / DCF model you can defend in an interview'],
+ ['ERP mentioned in passing','How planning systems work: SAP data flows, Essbase / EPM hierarchies, scenarios'],
+ ['Not covered','AI for Finance: GenAI for commentary, analysis and ML forecasting'],
+ ['Generic interview tips','Technical + case rounds: walk-throughs, Excel tests, "explain this variance"']
+];
+$('gapRows').innerHTML=GAP.map(([a,b])=>`<div class="grid grid-cols-12 border-b border-line last:border-0 text-sm"><div class="col-span-5 p-4 text-slate flex gap-2"><span class="text-rose">✕</span>${a}</div><div class="col-span-7 p-4 text-ink flex gap-2"><span class="text-em font-bold">✓</span>${b}</div></div>`).join('');
+
+/* =================== PROGRAM builder =================== */
+const MODS=[
+ {id:1,n:'Advanced Excel for Finance',h:16,d:'XLOOKUP, SUMIFS, pivots, Power Query, dynamic arrays, data validation',roles:['Finance Analyst','MIS Analyst']},
+ {id:2,n:'Excel Automation: VBA + AI',h:12,d:'Record & write macros, automate reports; Copilot / ChatGPT workflows',roles:['MIS Analyst','Reporting Analyst']},
+ {id:3,n:'SQL for Finance Data',h:14,d:'SELECT, JOINs, GROUP BY, CTEs, window functions on GL & sales data',roles:['Data Analyst (Finance)','Business Analyst']},
+ {id:4,n:'Power BI & DAX Dashboards',h:18,d:'Data modelling, DAX, time intelligence, publishing CFO dashboards',roles:['BI / Reporting Analyst','Data Analyst (Finance)']},
+ {id:5,n:'Data Analysis & Storytelling',h:8,d:'Clean, analyse and present: turning numbers into a 1-page story',roles:['Business Analyst','Finance Analyst']},
+ {id:6,n:'FP&A: Budgeting, Forecasting & Variance',h:16,d:'Driver-based budgets, rolling forecasts, price-volume-mix, headcount',roles:['FP&A Analyst','Business Finance Analyst']},
+ {id:7,n:'Financial Modelling & Valuation',h:16,d:'3-statement model, DCF, sensitivity & scenario analysis',roles:['Financial Analyst','Equity / Credit Research Associate']},
+ {id:8,n:'Financial Planning Systems',h:8,d:'How SAP, Essbase, Oracle EPM, Anaplan & SAC run enterprise planning',roles:['FP&A Analyst','Finance Systems Analyst']},
+ {id:9,n:'AI for Finance',h:12,d:'GenAI for commentary & analysis, prompt patterns, intro to ML forecasting',roles:['FP&A Analyst','Finance Analyst']},
+ {id:10,n:'Practical Scenarios & Capstone',h:14,d:'Month-end close, MIS pack, reconciliation and a full CFO-style capstone',roles:['Finance Analyst','Accounts / R2R Analyst']},
+ {id:11,n:'Interview & Job Readiness',h:10,d:'CV, LinkedIn, technical + case interviews, 3 mock interviews',roles:[]}
+];
+const PRESETS={flag:[1,2,3,4,5,6,7,8,9,10,11],bi:[1,3,4,5,11],fpa:[1,6,7,8,10,11],xl:[1,2,9],int:[1,5,6,11]};
+let sel=new Set(PRESETS.flag);
+function renderMods(){
+  $('modList').innerHTML=MODS.map(m=>`<label class="panel p-4 flex gap-3 cursor-pointer hover:border-cy/60 transition ${sel.has(m.id)?'!border-[#B9C2F0]':''}" style="${sel.has(m.id)?'background:#FAFBFF':''}"><input type="checkbox" data-m="${m.id}" ${sel.has(m.id)?'checked':''} class="mt-0.5 shrink-0"><div><div class="flex items-center gap-2"><span class="mono text-[11px] text-cyd">M${m.id}</span><span class="font-semibold text-ink text-sm">${m.n}</span></div><div class="text-xs text-slate mt-1">${m.d}</div><div class="text-[11px] mono text-slate/80 mt-1">${m.h} hrs</div></div></label>`).join('');
+  document.querySelectorAll('#modList input').forEach(c=>c.onchange=()=>{c.checked?sel.add(+c.dataset.m):sel.delete(+c.dataset.m);document.querySelectorAll('#presets .chip').forEach(x=>x.classList.remove('active'));renderMods()});
+  const hrs=MODS.filter(m=>sel.has(m.id)).reduce((s,m)=>s+m.h,0),pw=+$('pbFmt').value;
+  $('pbMods').textContent=sel.size;$('pbHrs').textContent=hrs;
+  $('pbWeeks').textContent=hrs?Math.ceil(hrs/pw)+' weeks':'–';
+  $('pbProj').textContent=hrs?`${pw} hrs/week · ${Math.max(1,Math.round(sel.size*0.6))} portfolio projects`:'Pick at least one module';
+  const roles=[...new Set(MODS.filter(m=>sel.has(m.id)).flatMap(m=>m.roles))];
+  $('pbRoles').innerHTML=roles.map(r=>`<span class="chip" style="cursor:default">${r}</span>`).join('')||'<span class="text-xs text-slate">–</span>';
+}
+document.querySelectorAll('#presets .chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('#presets .chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');sel=new Set(PRESETS[b.dataset.p]);renderMods()});
+$('pbFmt').onchange=renderMods;
+renderMods();
+
+/* =================== S1 Excel + VBA + AI =================== */
+const XL=[['North','Salaries',42.0,40.0],['North','Travel',6.8,5.5],['South','Salaries',38.5,39.0],['South','Software',11.2,9.0],['East','Salaries',29.4,30.0],['East','Travel',4.1,4.5],['West','Salaries',35.9,34.0],['West','Software',8.7,9.5]];
+const XLT=[
+ {k:'var',n:'Variance & Var %',fx:'=C2-D2   |   =IFERROR((C2-D2)/D2,0)',
+  run:()=>({head:['Region','Account','Actual','Budget','Variance','Var %'],rows:XL.map(r=>[r[0],r[1],fmt(r[2]),fmt(r[3]),fmt(r[2]-r[3]),fmt((r[2]-r[3])/r[3]*100)+'%']),nc:5}),
+  why:'<b>Why it matters:</b> variance analysis is the single most common task in an FP&A or MIS role. Every month, every cost line.',
+  vba:`<span class="k">Sub</span> AddVariance()
+  <span class="k">Dim</span> r <span class="k">As Long</span>, last <span class="k">As Long</span>
+  last = Cells(Rows.Count, 1).End(xlUp).Row
+  Range(<span class="s">"E1:F1"</span>) = Array(<span class="s">"Variance"</span>, <span class="s">"Var %"</span>)
+  <span class="k">For</span> r = 2 <span class="k">To</span> last
+    Cells(r, 5).Formula = <span class="s">"=C"</span> &amp; r &amp; <span class="s">"-D"</span> &amp; r
+    Cells(r, 6).Formula = <span class="s">"=IFERROR(E"</span> &amp; r &amp; <span class="s">"/D"</span> &amp; r &amp; <span class="s">",0)"</span>
+  <span class="k">Next</span> r
+  Columns(6).NumberFormat = <span class="s">"0.0%"</span>
+<span class="k">End Sub</span>`,
+  ai:'"Here is my expense table with Actual and Budget by region and account. Add Variance and Var % columns, then write 3 bullet points of commentary on the biggest overspends for my finance manager."'},
+ {k:'sumifs',n:'SUMIFS by region',fx:'=SUMIFS($C:$C,$A:$A,F2)   |   =SUMIFS($D:$D,$A:$A,F2)',
+  run:()=>{const g={};XL.forEach(r=>{g[r[0]]=g[r[0]]||[0,0];g[r[0]][0]+=r[2];g[r[0]][1]+=r[3]});return{head:['Region','Actual (SUMIFS)','Budget (SUMIFS)','Variance'],rows:Object.entries(g).map(([k,v])=>[k,fmt(v[0]),fmt(v[1]),fmt(v[0]-v[1])]),nc:1}},
+  why:'<b>Why it matters:</b> summarising transactions by region, cost centre or month without a pivot table is a standard Excel test question.',
+  vba:`<span class="k">Sub</span> RegionSummary()
+  <span class="k">Dim</span> ws <span class="k">As</span> Worksheet: <span class="k">Set</span> ws = Sheets.Add
+  ws.Name = <span class="s">"Summary"</span>
+  ws.Range(<span class="s">"A1:C1"</span>) = Array(<span class="s">"Region"</span>, <span class="s">"Actual"</span>, <span class="s">"Budget"</span>)
+  ws.Range(<span class="s">"A2:A5"</span>) = Application.Transpose( _
+      Array(<span class="s">"North"</span>, <span class="s">"South"</span>, <span class="s">"East"</span>, <span class="s">"West"</span>))
+  ws.Range(<span class="s">"B2:B5"</span>).Formula = <span class="s">"=SUMIFS(Data!C:C,Data!A:A,A2)"</span>
+  ws.Range(<span class="s">"C2:C5"</span>).Formula = <span class="s">"=SUMIFS(Data!D:D,Data!A:A,A2)"</span>
+<span class="k">End Sub</span>`,
+  ai:'"Write an Excel SUMIFS formula that totals column C where column A equals the region in F2 and column B equals \'Salaries\'. Explain each argument in one line."'},
+ {k:'xlookup',n:'XLOOKUP budget owner',fx:'=XLOOKUP(A2, Owners[Region], Owners[Manager], "Not found")',
+  run:()=>{const own={North:'R. Mehta',South:'A. Iyer',East:'S. Das',West:'P. Shah'};return{head:['Region','Account','Actual','Budget owner (XLOOKUP)'],rows:XL.map(r=>[r[0],r[1],fmt(r[2]),own[r[0]]]),nc:3}},
+  why:'<b>Why it matters:</b> "VLOOKUP vs XLOOKUP" is asked in almost every analyst interview. XLOOKUP looks left, handles missing values and doesn\'t break when columns move.',
+  vba:`<span class="k">Sub</span> FillOwners()
+  <span class="k">Dim</span> last <span class="k">As Long</span>
+  last = Cells(Rows.Count, 1).End(xlUp).Row
+  Range(<span class="s">"G2:G"</span> &amp; last).Formula2 = _
+    <span class="s">"=XLOOKUP(A2,Owners!A:A,Owners!B:B,""Not found"")"</span>
+<span class="k">End Sub</span>`,
+  ai:'"I have region codes in column A and a separate Owners sheet. Give me an XLOOKUP that returns the manager name, and \'Not found\' if missing. Then explain why it is safer than VLOOKUP."'},
+ {k:'flag',n:'Flag overspends (IF + AND)',fx:'=IF(AND(C2>D2,(C2-D2)/D2>5%),"Review","OK")',
+  run:()=>({head:['Region','Account','Actual','Budget','Flag'],rows:XL.map(r=>{const f=r[2]>r[3]&&(r[2]-r[3])/r[3]>.05;return[r[0],r[1],fmt(r[2]),fmt(r[3]),f?'<span class="text-rose font-bold">Review</span>':'OK']}),nc:4,hl:r=>r[4]!=='OK'}),
+  why:'<b>Why it matters:</b> controllers want exceptions, not 500 rows. Flagging lines above a threshold is how analysts focus their commentary.',
+  vba:`<span class="k">Sub</span> HighlightOverspend()
+  <span class="k">Dim</span> c <span class="k">As</span> Range
+  <span class="k">For Each</span> c <span class="k">In</span> Range(<span class="s">"C2:C"</span> &amp; Cells(Rows.Count,1).End(xlUp).Row)
+    <span class="k">If</span> c.Value &gt; c.Offset(0,1).Value * 1.05 <span class="k">Then</span>
+      c.EntireRow.Interior.Color = RGB(251, 227, 232)
+    <span class="k">End If</span>
+  <span class="k">Next</span> c
+<span class="k">End Sub</span>`,
+  ai:'"Write a VBA macro that highlights every row where Actual (col C) exceeds Budget (col D) by more than 5%, then emails the list to my manager using Outlook."'},
+ {k:'pivot',n:'Pivot by account',fx:'Insert ▸ PivotTable ▸ Rows: Account · Values: Sum of Actual, Sum of Budget',
+  run:()=>{const g={};XL.forEach(r=>{g[r[1]]=g[r[1]]||[0,0];g[r[1]][0]+=r[2];g[r[1]][1]+=r[3]});const rows=Object.entries(g).map(([k,v])=>[k,fmt(v[0]),fmt(v[1]),fmt((v[0]/v[1]-1)*100)+'%']);const T=XL.reduce((s,r)=>[s[0]+r[2],s[1]+r[3]],[0,0]);rows.push(['<b>Grand Total</b>','<b>'+fmt(T[0])+'</b>','<b>'+fmt(T[1])+'</b>','<b>'+fmt((T[0]/T[1]-1)*100)+'%</b>']);return{head:['Account','Sum of Actual','Sum of Budget','Var %'],rows,nc:3}},
+  why:'<b>Why it matters:</b> pivots are the fastest way to answer "where did the money go?" and they are the first step towards Power BI thinking.',
+  vba:`<span class="k">Sub</span> BuildPivot()
+  <span class="k">Dim</span> pc <span class="k">As</span> PivotCache, pt <span class="k">As</span> PivotTable
+  <span class="k">Set</span> pc = ActiveWorkbook.PivotCaches.Create( _
+      xlDatabase, Sheets(<span class="s">"Data"</span>).Range(<span class="s">"A1"</span>).CurrentRegion)
+  <span class="k">Set</span> pt = pc.CreatePivotTable(Sheets.Add.Range(<span class="s">"A3"</span>))
+  pt.PivotFields(<span class="s">"Account"</span>).Orientation = xlRowField
+  pt.AddDataField pt.PivotFields(<span class="s">"Actual"</span>), <span class="s">"Sum of Actual"</span>, xlSum
+  pt.AddDataField pt.PivotFields(<span class="s">"Budget"</span>), <span class="s">"Sum of Budget"</span>, xlSum
+<span class="k">End Sub</span>`,
+  ai:'"Summarise this pivot for a CFO in 3 lines: total overspend, the account driving it and one recommended action. Keep it under 50 words."'}
+];
+let xlSel='var';
+function renderXl(){
+  const t=XLT.find(x=>x.k===xlSel),r=t.run();
+  $('xlTasks').innerHTML=XLT.map(x=>`<button class="chip ${x.k===xlSel?'active':''}" data-k="${x.k}">${x.n}</button>`).join('');
+  document.querySelectorAll('#xlTasks .chip').forEach(b=>b.onclick=()=>{xlSel=b.dataset.k;renderXl()});
+  $('xlFx').textContent=t.fx;
+  const numIdx=r.head.map((h,i)=>/Actual|Budget|Variance|Var|SUM/i.test(h)?i:-1).filter(i=>i>=0);
+  $('xlTable').innerHTML=tbl(r.head,r.rows,{num:numIdx,newcol:r.nc,hl:r.hl});
+  $('xlWhy').innerHTML=t.why;$('xlVba').innerHTML=t.vba;$('xlAi').textContent=t.ai;
+}
+renderXl();
+
+/* =================== S2 SQL =================== */
+const GL=[],BUD=[];
+(()=>{const r=rng(11),months=['2026-01','2026-02','2026-03'],cc={Sales:[['Salaries',40],['Travel',8]],Marketing:[['Salaries',18],['Marketing Spend',25]],Operations:[['Salaries',35],['Rent',12]],IT:[['Salaries',22],['Software',14]]},bf={Sales:1.02,Marketing:.9,Operations:1.0,IT:.94},rev=[260,275,298];
+ months.forEach((m,mi)=>{GL.push({month:m,cost_center:'Sales',account:'Revenue',amount:+(rev[mi]*(1+(r()-.5)*.06)).toFixed(1)});
+  Object.entries(cc).forEach(([c,accs])=>{let base=0;accs.forEach(([a,b])=>{base+=b;GL.push({month:m,cost_center:c,account:a,amount:+(b*(1+(r()-.5)*.18)).toFixed(1)})});BUD.push({month:m,cost_center:c,budget:+(base*bf[c]).toFixed(1)})})})})();
+const AP=[{vendor:'Infotech Solutions',invoice_no:'INV-4471',amount:3.2},{vendor:'Swift Logistics',invoice_no:'SL-0912',amount:1.8},{vendor:'Infotech Solutions',invoice_no:'INV-4471',amount:3.2},{vendor:'Metro Office Supplies',invoice_no:'MO-221',amount:0.6},{vendor:'Swift Logistics',invoice_no:'SL-0913',amount:2.1},{vendor:'Cloudnine Software',invoice_no:'CN-77',amount:5.4},{vendor:'Cloudnine Software',invoice_no:'CN-77',amount:5.4},{vendor:'Metro Office Supplies',invoice_no:'MO-222',amount:0.9}];
+const grp=(arr,keyFn,valFn)=>{const g={};arr.forEach(x=>{const k=keyFn(x);g[k]=(g[k]||0)+valFn(x)});return g};
+const SQLQ=[
+ {n:'Total expense by cost centre',why:'First thing a controller asks at month-end: which cost centre spent what?',
+  sql:`<span class="k">SELECT</span> cost_center,
+       <span class="k">SUM</span>(amount) <span class="k">AS</span> total_expense
+<span class="k">FROM</span>   gl
+<span class="k">WHERE</span>  account &lt;&gt; <span class="s">'Revenue'</span>
+<span class="k">GROUP BY</span> cost_center
+<span class="k">ORDER BY</span> total_expense <span class="k">DESC</span>;`,
+  run:()=>{const g=grp(GL.filter(x=>x.account!=='Revenue'),x=>x.cost_center,x=>x.amount);return{h:['cost_center','total_expense'],r:Object.entries(g).sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,fmt(v)]),num:[1]}}},
+ {n:'Monthly revenue trend + growth',why:'Window functions (LAG) let you calculate month-on-month growth in one query, a favourite interview topic.',
+  sql:`<span class="k">SELECT</span> month,
+       <span class="k">SUM</span>(amount) <span class="k">AS</span> revenue,
+       <span class="k">ROUND</span>(100.0 * (<span class="k">SUM</span>(amount) - <span class="k">LAG</span>(<span class="k">SUM</span>(amount)) <span class="k">OVER</span> (<span class="k">ORDER BY</span> month))
+             / <span class="k">LAG</span>(<span class="k">SUM</span>(amount)) <span class="k">OVER</span> (<span class="k">ORDER BY</span> month), 1) <span class="k">AS</span> mom_growth_pct
+<span class="k">FROM</span>   gl
+<span class="k">WHERE</span>  account = <span class="s">'Revenue'</span>
+<span class="k">GROUP BY</span> month
+<span class="k">ORDER BY</span> month;`,
+  run:()=>{const rows=GL.filter(x=>x.account==='Revenue').map(x=>[x.month,x.amount]);return{h:['month','revenue','mom_growth_pct'],r:rows.map((x,i)=>[x[0],fmt(x[1]),i?fmt((x[1]/rows[i-1][1]-1)*100):'NULL']),num:[1,2]}}},
+ {n:'Top 3 expense accounts',why:'Spotting the biggest cost lines quickly: the basis of every cost-reduction discussion.',
+  sql:`<span class="k">SELECT</span> account, <span class="k">SUM</span>(amount) <span class="k">AS</span> spend
+<span class="k">FROM</span>   gl
+<span class="k">WHERE</span>  account &lt;&gt; <span class="s">'Revenue'</span>
+<span class="k">GROUP BY</span> account
+<span class="k">ORDER BY</span> spend <span class="k">DESC</span>
+<span class="k">LIMIT</span> 3;  <span class="c">-- SQL Server: SELECT TOP 3 …</span>`,
+  run:()=>{const g=grp(GL.filter(x=>x.account!=='Revenue'),x=>x.account,x=>x.amount);return{h:['account','spend'],r:Object.entries(g).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>[k,fmt(v)]),num:[1]}}},
+ {n:'Actual vs budget (JOIN + CTE)',why:'Joining actuals to budget is exactly what sits behind every variance report and Power BI model.',
+  sql:`<span class="k">WITH</span> actuals <span class="k">AS</span> (
+  <span class="k">SELECT</span> month, cost_center, <span class="k">SUM</span>(amount) <span class="k">AS</span> actual
+  <span class="k">FROM</span> gl <span class="k">WHERE</span> account &lt;&gt; <span class="s">'Revenue'</span>
+  <span class="k">GROUP BY</span> month, cost_center
+)
+<span class="k">SELECT</span> a.cost_center,
+       <span class="k">SUM</span>(a.actual) <span class="k">AS</span> actual, <span class="k">SUM</span>(b.budget) <span class="k">AS</span> budget,
+       <span class="k">SUM</span>(a.actual) - <span class="k">SUM</span>(b.budget) <span class="k">AS</span> variance,
+       <span class="k">ROUND</span>(100.0*(<span class="k">SUM</span>(a.actual)-<span class="k">SUM</span>(b.budget))/<span class="k">SUM</span>(b.budget),1) <span class="k">AS</span> var_pct
+<span class="k">FROM</span>   actuals a
+<span class="k">JOIN</span>   budget b <span class="k">ON</span> a.month = b.month <span class="k">AND</span> a.cost_center = b.cost_center
+<span class="k">GROUP BY</span> a.cost_center
+<span class="k">ORDER BY</span> var_pct <span class="k">DESC</span>;`,
+  run:()=>{const a=grp(GL.filter(x=>x.account!=='Revenue'),x=>x.cost_center,x=>x.amount),b=grp(BUD,x=>x.cost_center,x=>x.budget);return{h:['cost_center','actual','budget','variance','var_pct'],r:Object.keys(a).map(k=>[k,a[k],b[k],a[k]-b[k],(a[k]-b[k])/b[k]*100]).sort((x,y)=>y[4]-x[4]).map(x=>[x[0],fmt(x[1]),fmt(x[2]),fmt(x[3]),fmt(x[4])]),num:[1,2,3,4],hl:r=>parseFloat(r[4])>3}}},
+ {n:'Find duplicate invoices (HAVING)',why:'Duplicate payments are a real control failure. GROUP BY + HAVING catches them, and the WHERE vs HAVING difference is a classic interview question.',
+  sql:`<span class="k">SELECT</span> vendor, invoice_no, amount,
+       <span class="k">COUNT</span>(*) <span class="k">AS</span> times_posted
+<span class="k">FROM</span>   ap_invoices
+<span class="k">GROUP BY</span> vendor, invoice_no, amount
+<span class="k">HAVING</span> <span class="k">COUNT</span>(*) &gt; 1;`,
+  run:()=>{const g=grp(AP,x=>x.vendor+'|'+x.invoice_no+'|'+x.amount,()=>1);return{h:['vendor','invoice_no','amount','times_posted'],r:Object.entries(g).filter(([,v])=>v>1).map(([k,v])=>{const p=k.split('|');return[p[0],p[1],fmt(+p[2]),v]}),num:[2,3],hl:()=>true}}}
+];
+let sqlSel=0;
+function renderSqlList(){$('sqlQs').innerHTML=SQLQ.map((q,i)=>`<button class="chip text-left ${i===sqlSel?'active':''}" data-i="${i}">${q.n}</button>`).join('');document.querySelectorAll('#sqlQs .chip').forEach(b=>b.onclick=()=>{sqlSel=+b.dataset.i;showSql(true)})}
+function showSql(run){const q=SQLQ[sqlSel];renderSqlList();$('sqlCode').innerHTML=q.sql;$('sqlWhy').innerHTML='<span class="text-ink font-semibold">Why a finance analyst needs this:</span> '+q.why;
+  if(run){const t0=performance.now(),r=q.run();$('sqlOut').innerHTML=tbl(r.h,r.r,{num:r.num,hl:r.hl});$('sqlMeta').textContent=r.r.length+' rows · '+Math.max(1,Math.round(performance.now()-t0+3))+' ms'}else{$('sqlOut').innerHTML='<div class="text-xs text-slate py-6 text-center">Press ▶ Run</div>';$('sqlMeta').textContent=''}}
+$('sqlRun').onclick=()=>showSql(true);
+showSql(true);
+
+/* =================== S3 Power BI =================== */
+const PB_M=['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+const PB_R=['North','South','East','West'],PB_C=['Beverages','Snacks','Personal Care'];
+const PB_GM={Beverages:.38,Snacks:.32,'Personal Care':.46};
+const PB=[];(()=>{const r=rng(23),seas=[.92,.95,1.0,.97,.96,1.0,1.12,1.15,1.05,.97,.94,1.02],rb={North:[30,.03],South:[34,-.02],East:[18,-.06],West:[28,.05]},cb={Beverages:.4,Snacks:.35,'Personal Care':.25};
+ PB_R.forEach(g=>PB_C.forEach(c=>PB_M.forEach((m,i)=>{const bud=rb[g][0]*cb[c]*seas[i];const act=bud*(1+rb[g][1]+(i/11)*(c==='Snacks'?-.05:.03)+(r()-.5)*.08);PB.push({g,c,i,act,bud,gp:act*(PB_GM[c]+(r()-.5)*.02)})})))})();
+let pbReg='All',pbCat='All',pbM,pbRg;
+function pbChips(id,arr,cur,set){$(id).innerHTML=['All',...arr].map(x=>`<button class="chip ${x===cur?'active':''}" data-v="${x}">${x}</button>`).join('');document.querySelectorAll('#'+id+' .chip').forEach(b=>b.onclick=()=>{set(b.dataset.v);renderPbi()})}
+function renderPbi(){
+  pbChips('pbiReg',PB_R,pbReg,v=>pbReg=v);pbChips('pbiCat',PB_C,pbCat,v=>pbCat=v);
+  const f=PB.filter(x=>(pbReg==='All'||x.g===pbReg)&&(pbCat==='All'||x.c===pbCat));
+  const A=f.reduce((s,x)=>s+x.act,0),B=f.reduce((s,x)=>s+x.bud,0),G=f.reduce((s,x)=>s+x.gp,0);
+  const mA=PB_M.map((_,i)=>f.filter(x=>x.i===i).reduce((s,x)=>s+x.act,0)),mB=PB_M.map((_,i)=>f.filter(x=>x.i===i).reduce((s,x)=>s+x.bud,0));
+  const best=mA.indexOf(Math.max(...mA)),h2=mA.slice(6).reduce((a,b)=>a+b,0)/mA.slice(0,6).reduce((a,b)=>a+b,0)-1;
+  const v=(A/B-1)*100,col=v>=0?'text-em':'text-rose';
+  $('pbiKpis').innerHTML=[
+   ['Revenue (FY)','₹'+fmt(A,0)+' Cr','text-ink','Budget ₹'+fmt(B,0)+' Cr'],
+   ['vs Budget',(v>=0?'+':'')+fmt(v)+'%',col,(A-B>=0?'+':'−')+'₹'+fmt(Math.abs(A-B))+' Cr'],
+   ['Gross margin',fmt(G/A*100)+'%','text-cyd','Gross profit ₹'+fmt(G,0)+' Cr'],
+   ['Peak month',PB_M[best],'text-am','₹'+fmt(mA[best])+' Cr · H2 vs H1 '+(h2>=0?'+':'')+fmt(h2*100)+'%']
+  ].map(k=>`<div class="rounded-xl border border-line p-4"><div class="text-xs text-slate">${k[0]}</div><div class="text-2xl font-extrabold ${k[2]}">${k[1]}</div><div class="text-[11px] text-slate/80">${k[3]}</div></div>`).join('');
+  const d1={labels:PB_M,datasets:[{type:'bar',label:'Actual',data:mA,backgroundColor:mA.map((x,i)=>x>=mB[i]?'rgba(78,154,134,.85)':'rgba(208,96,122,.8)'),borderRadius:4},{type:'line',label:'Budget',data:mB,borderColor:'#5B6CD6',borderWidth:2,pointRadius:2,tension:.3}]};
+  if(!pbM)pbM=new Chart($('pbiMonth'),{data:d1,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': ₹'+c.raw.toFixed(1)+' Cr'}}},scales:{x:{grid:{display:false}},y:{grid,title:{display:true,text:'₹ Cr'}}}}});else{pbM.data=d1;pbM.update()}
+  const fr=PB.filter(x=>pbCat==='All'||x.c===pbCat),rA=PB_R.map(g=>fr.filter(x=>x.g===g).reduce((s,x)=>s+x.act,0));
+  const d2={labels:PB_R,datasets:[{data:rA,backgroundColor:PB_R.map(g=>pbReg==='All'||pbReg===g?'#5B6CD6':'#C9D1E8'),borderRadius:6}]};
+  if(!pbRg)pbRg=new Chart($('pbiRegion'),{type:'bar',data:d2,options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,onClick:(e,els)=>{if(els.length){const g=PB_R[els[0].index];pbReg=pbReg===g?'All':g;renderPbi()}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'₹'+c.raw.toFixed(1)+' Cr'}}},scales:{x:{grid},y:{grid:{display:false}}}}});else{pbRg.data=d2;pbRg.update()}
+  const worst=PB_M.map((m,i)=>[m,mA[i]-mB[i]]).sort((a,b)=>a[1]-b[1])[0];
+  $('pbiInsight').innerHTML=`<div class="text-xs font-semibold text-ink mb-2">Auto-generated commentary (what students learn to write)</div><b>${pbReg==='All'?'All regions':pbReg} · ${pbCat==='All'?'all categories':pbCat}:</b> revenue of ₹${fmt(A,0)} Cr is <b class="${col}">${v>=0?'ahead of':'behind'} budget by ${fmt(Math.abs(v))}%</b>, with gross margin at ${fmt(G/A*100)}%. The weakest month was <b>${worst[0]}</b> (${worst[1]>=0?'+':'−'}₹${fmt(Math.abs(worst[1]))} Cr vs budget). ${h2<0?'Second-half revenue is softer than the first half, so the full-year outlook needs a recovery plan.':'Festive-season months lifted the second half, so protect supply and pricing into Q4.'}`;
+}
+renderPbi();
+
+/* =================== S4 DCF =================== */
+$('dcfInputs').innerHTML=[
+ slider('dRev','Current revenue',100,2000,50,500,'cr'),slider('dG','Revenue growth % (yrs 1–5)',0,30,1,15,'pct'),slider('dM','EBITDA margin %',5,40,1,20,'pct'),
+ slider('dCap','Capex % of revenue',1,15,0.5,5,'pct'),slider('dTax','Tax rate %',15,35,1,25,'pct'),slider('dW','WACC %',8,18,0.5,12,'pct'),
+ slider('dTg','Terminal growth %',2,7,0.5,5,'pct'),slider('dNd','Net debt',0,800,10,100,'cr')].join('');
+let dcfC;
+function dcfCalc(rev,g,m,cap,tax,w,tg){
+  const rows=[];let prev=rev,pv=0;
+  for(let y=1;y<=5;y++){const R=prev*(1+g),E=R*m,DA=R*.04,EBIT=E-DA,NOPAT=EBIT*(1-tax),CX=R*cap,dNWC=(R-prev)*.15,FCF=NOPAT+DA-CX-dNWC,df=1/Math.pow(1+w,y);pv+=FCF*df;rows.push({y,R,E,EBIT,NOPAT,CX,dNWC,FCF,df,pvF:FCF*df});prev=R}
+  const TV=rows[4].FCF*(1+tg)/(w-tg),pvTV=TV*rows[4].df;return{rows,pv,TV,pvTV,EV:pv+pvTV};
+}
+function renderDcf(){
+  const g=+$('dG').value/100,m=+$('dM').value/100,cap=+$('dCap').value/100,tax=+$('dTax').value/100,w=+$('dW').value/100,tg=+$('dTg').value/100,rev=+$('dRev').value,nd=+$('dNd').value;
+  if(w-tg<0.01){$('dcfKpis').innerHTML='<div class="panel p-4 sm:col-span-3 text-rose text-sm">WACC must be at least 1 point above terminal growth. Otherwise the terminal value explodes. (That\'s an interview answer too!)</div>';return}
+  const d=dcfCalc(rev,g,m,cap,tax,w,tg),eq=d.EV-nd,tvShare=d.pvTV/d.EV*100;
+  $('dcfKpis').innerHTML=[['Enterprise value','₹'+fmt(d.EV,0)+' Cr','text-cyd','PV of FCF + PV of terminal value'],['Equity value','₹'+fmt(eq,0)+' Cr',eq>=0?'text-em':'text-rose','EV − net debt ₹'+nd+' Cr'],['EV / EBITDA (yr 1)',fmt(d.EV/d.rows[0].E)+'×','text-am','Terminal value = '+fmt(tvShare,0)+'% of EV']].map(k=>`<div class="panel p-4"><div class="text-xs text-slate">${k[0]}</div><div class="text-2xl font-extrabold ${k[2]}">${k[1]}</div><div class="text-[11px] text-slate/80">${k[3]}</div></div>`).join('');
+  const lines=[['Revenue','R'],['EBITDA','E'],['EBIT','EBIT'],['NOPAT','NOPAT'],['(–) Capex','CX'],['(–) Δ Working capital','dNWC'],['Free cash flow','FCF'],['Discount factor','df'],['PV of FCF','pvF']];
+  $('dcfTable').innerHTML=tbl(['₹ Cr',...d.rows.map(r=>'Year '+r.y)],lines.map(([l,k])=>[k==='FCF'||k==='pvF'?'<b>'+l+'</b>':l,...d.rows.map(r=>k==='df'?r[k].toFixed(3):(k==='FCF'||k==='pvF'?'<b>'+fmt(r[k])+'</b>':fmt(r[k])))]),{num:[1,2,3,4,5]});
+  const cd={labels:['PV of 5-yr FCF','PV of terminal value','Enterprise value','(–) Net debt','Equity value'],datasets:[{data:[[0,d.pv],[d.pv,d.EV],[0,d.EV],[d.EV-nd,d.EV],[0,eq]],backgroundColor:['#4E9A86','#4E9A86','#5B6CD6','#D0607A','#3A47A8'],borderRadius:6}]};
+  if(!dcfC)dcfC=new Chart($('dcfChart'),{type:'bar',data:cd,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'₹'+(c.raw[1]-c.raw[0]).toFixed(0)+' Cr'}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid}}}});else{dcfC.data=cd;dcfC.update()}
+  const ws=[-1,-.5,0,.5,1].map(x=>w+x/100),ts=[-1,-.5,0,.5,1].map(x=>tg+x/100);
+  $('dcfSens').innerHTML=`<table class="tbl"><thead><tr><th>WACC \\ g</th>${ts.map(t=>`<th class="num">${fmt(t*100)}%</th>`).join('')}</tr></thead><tbody>${ws.map(wi=>`<tr><td class="font-semibold">${fmt(wi*100)}%</td>${ts.map(ti=>{if(wi-ti<0.01)return '<td class="num text-slate/60">n/a</td>';const e=dcfCalc(rev,g,m,cap,tax,wi,ti).EV-nd,base=Math.abs(wi-w)<1e-9&&Math.abs(ti-tg)<1e-9;return `<td class="num ${base?'newcol':''}">${fmt(e,0)}</td>`}).join('')}</tr>`).join('')}</tbody></table>`;
+}
+bindSliders(['dRev','dG','dM','dCap','dTax','dW','dTg','dNd'],renderDcf);renderDcf();
+
+/* =================== S5 Interview simulator =================== */
+const IVQ=[
+ {c:'Accounting',q:'Depreciation goes up by ₹10 (tax rate 25%). What happens to cash at the end of the year?',o:['Cash falls by ₹10','Cash rises by ₹2.5','No change, depreciation is non-cash','Cash falls by ₹7.5'],a:1,e:'Net income falls by ₹7.5 (10 × (1 − 25%)). In the cash flow statement you add back the ₹10 non-cash expense, so operating cash flow rises by ₹2.5 thanks to the tax shield. This "walk me through the 3 statements" question is asked constantly.'},
+ {c:'Accounting',q:'Which of these is an accrual you would book at month-end?',o:['Cash paid to a vendor today','Electricity used this month, bill expected next month','Customer advance received','Purchase of a new laptop'],a:1,e:'Accrual accounting records expenses when incurred, not when paid. Unbilled electricity for the month is a classic month-end accrual. R2R and close teams do this every month.'},
+ {c:'FP&A',q:'Actual marketing spend is ₹45L vs a budget of ₹50L. How do you describe it?',o:['Unfavourable variance of ₹5L','Favourable variance of ₹5L, but check whether it is timing or a real saving','Revenue variance','No variance'],a:1,e:'Spending below budget is favourable, but a good analyst asks why. Is a campaign just delayed to next month (timing) or truly cancelled (saving)? That follow-up is what interviewers listen for.'},
+ {c:'FP&A',q:'Revenue rose 8%: volume +5%, price +4%, currency −1%. What is this analysis called?',o:['Ratio analysis','Price-Volume-Mix (PVM) bridge','DuPont analysis','Break-even analysis'],a:1,e:'A PVM (or PVM + FX) bridge splits revenue change into its drivers. It is the backbone of CFO variance reporting. You can try one in the "Margin Bridge" demo.'},
+ {c:'FP&A',q:'What is the main advantage of a rolling forecast over a static annual budget?',o:['It never changes','It always looks 12+ months ahead and updates with the latest actuals','It requires no data','It replaces accounting'],a:1,e:'Rolling forecasts keep a constant horizon (e.g. the next 4–6 quarters) and are refreshed with actuals, so leadership plans with current information instead of a year-old budget.'},
+ {c:'Excel',q:'Why is XLOOKUP generally preferred over VLOOKUP?',o:['It is faster to type','It can look left, defaults to exact match and doesn\'t break when columns are inserted','It only works on numbers','VLOOKUP no longer exists'],a:1,e:'VLOOKUP needs a column index number and can only look right, so inserting a column silently breaks it. XLOOKUP references the return column directly and has built-in "if not found" handling.'},
+ {c:'Excel',q:'You must total sales where Region = "North" AND Product = "Snacks". Which function?',o:['SUMIF','SUMIFS','COUNTIFS','SUMPRODUCT only'],a:1,e:'SUMIFS handles multiple criteria: =SUMIFS(Sales, Region, "North", Product, "Snacks"). SUMIF supports only one condition.'},
+ {c:'SQL',q:'What is the difference between WHERE and HAVING?',o:['No difference','WHERE filters rows before grouping; HAVING filters groups after aggregation','HAVING is faster','WHERE only works with numbers'],a:1,e:'WHERE filters individual rows before GROUP BY; HAVING filters aggregated results, e.g. HAVING COUNT(*) > 1 to find duplicate invoices. See the SQL demo.'},
+ {c:'SQL',q:'An INNER JOIN between actuals and budget returns fewer rows than expected. Most likely cause?',o:['SQL bug','Some cost centres exist in one table but not the other','Too much data','Wrong font'],a:1,e:'INNER JOIN keeps only matching keys. Cost centres with actuals but no budget (or vice versa) drop out. Use LEFT/FULL JOIN to find them. This is a real reconciliation issue.'},
+ {c:'Power BI',q:'In DAX, what does CALCULATE do?',o:['Adds two columns','Evaluates an expression in a modified filter context','Creates a visual','Imports data'],a:1,e:'CALCULATE changes the filter context, e.g. CALCULATE([Revenue], Region = "North") or with SAMEPERIODLASTYEAR for prior year. It is the most important DAX function and a top interview question.'},
+ {c:'Modelling',q:'If WACC increases, what happens to the DCF enterprise value (all else equal)?',o:['Increases','Decreases','No change','Doubles'],a:1,e:'A higher discount rate reduces the present value of future cash flows and the terminal value, so EV falls. Check the sensitivity table in the DCF demo.'},
+ {c:'Modelling',q:'Which is NOT part of unlevered free cash flow?',o:['NOPAT','Depreciation add-back','Interest expense','Change in working capital'],a:2,e:'Unlevered FCF is before financing: NOPAT + D&A − capex − ΔNWC. Interest belongs to debt holders and is captured through WACC instead.'},
+ {c:'AI for Finance',q:'You use GenAI to draft monthly variance commentary. What is the most important step?',o:['Publish it directly','Check every number and driver against the source data before sharing','Ask it to make the numbers look better','Avoid giving it any context'],a:1,e:'AI speeds up the first draft, but finance is accountable for accuracy. Reconcile every figure to the source and keep a human review. That\'s how I ran AI-generated narratives for CFO dashboards.'}
+];
+let ivCat='All',ivList=[],ivI=0,ivRight=0,ivDone=0;
+function ivStart(){ivList=IVQ.filter(q=>ivCat==='All'||q.c===ivCat);ivI=0;ivRight=0;ivDone=0;ivShow()}
+function ivShow(){
+  const cats=['All',...new Set(IVQ.map(q=>q.c))];
+  $('ivCats').innerHTML=cats.map(c=>`<button class="chip ${c===ivCat?'active':''}" data-c="${c}">${c}</button>`).join('');
+  document.querySelectorAll('#ivCats .chip').forEach(b=>b.onclick=()=>{ivCat=b.dataset.c;ivStart()});
+  $('ivScore').textContent=ivRight+'/'+ivDone;$('ivBar').style.width=(ivDone/ivList.length*100)+'%';
+  if(ivI>=ivList.length){const p=ivRight/ivList.length;$('ivTag').textContent='COMPLETE';$('ivQ').textContent='You scored '+ivRight+' out of '+ivList.length+'.';$('ivOpts').innerHTML='';$('ivExp').classList.remove('hidden');$('ivExp').innerHTML=p>=.8?'Strong fundamentals. The program will focus on making you <b>fast and practical</b> with tools, plus mock interviews.':p>=.5?'A good base with gaps that interviewers will find. The FP&amp;A, SQL and Power BI modules close exactly these.':'This is normal for most graduates, and it\'s exactly why this program exists. Every one of these topics is covered hands-on.';$('ivNext').classList.add('hidden');$('ivProg').textContent='';return}
+  const q=ivList[ivI];$('ivProg').textContent='Question '+(ivI+1)+' of '+ivList.length;$('ivTag').textContent=q.c.toUpperCase();$('ivQ').textContent=q.q;
+  $('ivExp').classList.add('hidden');$('ivNext').classList.add('hidden');
+  $('ivOpts').innerHTML=q.o.map((o,i)=>`<button class="opt" data-i="${i}">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('');
+  document.querySelectorAll('#ivOpts .opt').forEach(b=>b.onclick=()=>{
+    if($('ivOpts').dataset.locked==='1')return;$('ivOpts').dataset.locked='1';
+    const i=+b.dataset.i;document.querySelectorAll('#ivOpts .opt').forEach((x,j)=>{if(j===q.a)x.classList.add('right');else if(j===i)x.classList.add('wrong')});
+    ivDone++;if(i===q.a)ivRight++;$('ivScore').textContent=ivRight+'/'+ivDone;$('ivBar').style.width=(ivDone/ivList.length*100)+'%';
+    $('ivExp').innerHTML=(i===q.a?'<b class="text-em">Correct.</b> ':'<b class="text-rose">Not quite.</b> ')+q.e;$('ivExp').classList.remove('hidden');$('ivNext').classList.remove('hidden');
+  });
+  $('ivOpts').dataset.locked='0';
+}
+$('ivNext').onclick=()=>{ivI++;ivShow()};$('ivReset').onclick=ivStart;ivStart();
+
+/* =================== S6 Readiness =================== */
+const RD=[['Excel (advanced)',4,'M1–M2: Advanced Excel, VBA + AI'],['Accounting & month-end close',4,'M10: Practical scenarios'],['Budgeting & variance analysis',3,'M6: FP&A'],['Financial modelling',3,'M7: Modelling & valuation'],['SQL',3,'M3: SQL for Finance'],['Power BI / dashboards',3,'M4: Power BI & DAX'],['AI tools for finance',3,'M9: AI for Finance'],['Communicating insights',4,'M5 + M11: Storytelling & interviews']];
+const RDdef=[3,2,1,1,0,1,1,2];
+$('rdSliders').innerHTML=RD.map((r,i)=>`<div><div class="flex justify-between text-xs text-slate"><span>${r[0]}</span><span class="mono text-cyd" id="rd${i}V">${RDdef[i]}</span></div><input type="range" id="rd${i}" min="0" max="5" step="1" value="${RDdef[i]}"></div>`).join('');
+let rdC;
+function renderRd(){
+  const you=RD.map((_,i)=>+$('rd'+i).value);RD.forEach((_,i)=>$('rd'+i+'V').textContent=you[i]);
+  const exp=RD.map(r=>r[1]),score=Math.round(you.reduce((s,v,i)=>s+Math.min(v,exp[i]),0)/exp.reduce((a,b)=>a+b)*100);
+  const sc=$('rdScore');sc.textContent=score+'%';sc.className='text-5xl font-extrabold '+(score>=80?'text-em':score>=50?'text-am':'text-rose');
+  $('rdBand').textContent=score>=80?'Interview-ready: polish and apply':score>=50?'Getting there: close the gaps below':'Not yet job-ready. That is fixable in weeks, not years';
+  const gaps=RD.map((r,i)=>[r[0],exp[i]-you[i],r[2]]).filter(g=>g[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  $('rdGaps').innerHTML=gaps.length?gaps.map(g=>`<div class="rounded-lg border border-line p-3"><div class="flex justify-between text-sm"><span class="text-ink font-semibold">${g[0]}</span><span class="mono text-rose text-xs">−${g[1]}</span></div><div class="text-xs text-cyd mt-0.5">→ ${g[2]}</div></div>`).join(''):'<div class="text-sm text-em">No gaps against the entry-level bar. Time to aim higher!</div>';
+  const data={labels:RD.map(r=>r[0].replace(' (advanced)','').replace(' & month-end close','').replace(' analysis','')),datasets:[{label:'Expected (entry-level analyst)',data:exp,borderColor:'#9AA4BA',backgroundColor:'rgba(154,164,186,.12)',borderDash:[5,4],borderWidth:2,pointRadius:0},{label:'You',data:you,borderColor:'#5B6CD6',backgroundColor:'rgba(91,108,214,.2)',borderWidth:2,pointBackgroundColor:'#5B6CD6'}]};
+  if(!rdC)rdC=new Chart($('rdRadar'),{type:'radar',data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},scales:{r:{min:0,max:5,ticks:{stepSize:1,display:false},grid:{color:'rgba(31,42,68,.1)'},angleLines:{color:'rgba(31,42,68,.1)'},pointLabels:{font:{size:10},color:'#1F2A44'}}}}});else{rdC.data=data;rdC.update()}
+}
+RD.forEach((_,i)=>$('rd'+i).addEventListener('input',renderRd));renderRd();
+
+/* =================== INSTITUTES: models + calculator =================== */
+const MODELS=[
+ {t:'Co-branded certification',tag:'Institutes & academies',c:'#5B6CD6',d:'A full learning path under your brand + mine. Learners pay a program fee and revenue is shared per batch.',b:['Highest revenue potential','Co-branded certificate','I deliver; you enrol & host']},
+ {t:'Campus & semester courses',tag:'Colleges',c:'#4E9A86',d:'Selected courses embedded as value-added or skill courses, plus placement bootcamps before campus drives.',b:['Fits the academic calendar','Per-student or per-batch fee','Faculty development available']},
+ {t:'Corporate & GCC training',tag:'Companies',c:'#D9893B',d:'Tailored workshops and programs for finance teams on Power BI, automation, FP&A and AI for Finance.',b:['Built on your use cases','On-site or virtual','Fixed program fee']},
+ {t:'Content licensing & alliances',tag:'Training platforms',c:'#D0607A',d:'License the curriculum, labs and demos for your learning platform, or partner on joint programs and certifications.',b:['Ready curriculum IP','Scalable across channels','Licensing or revenue-share models']}
+];
+$('models').innerHTML=MODELS.map(m=>`<div class="panel p-5 flex flex-col gap-3" style="border-top:3px solid ${m.c}"><div class="flex justify-between items-start gap-2"><div class="font-bold text-ink text-sm">${m.t}</div><span class="text-[10px] font-bold px-2 py-0.5 rounded whitespace-nowrap" style="color:${m.c};background:${m.c}1f">${m.tag}</span></div><p class="text-xs text-slate leading-relaxed">${m.d}</p><ul class="text-xs text-ink space-y-1 mt-auto">${m.b.map(x=>`<li>✓ ${x}</li>`).join('')}</ul></div>`).join('');
+
+/* =================== STUDENTS =================== */
+const PORT=[['Variance analysis pack in Excel + VBA','Automated budget vs actual report with commentary','M1–M2'],['Finance SQL query library','GL, budget and invoice queries incl. duplicate-payment check','M3'],['CFO dashboard in Power BI','Revenue, margin and variance with DAX time intelligence','M4'],['3-statement & DCF model','Valuation with sensitivity tables you can explain','M7'],['Rolling forecast with AI','Driver-based forecast plus an ML / GenAI-assisted view','M6 + M9'],['Capstone: month-end MIS pack','Close → reconcile → report → present, like a real analyst','M10']];
+$('portfolio').innerHTML=PORT.map((p,i)=>`<li class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-lg bg-[#E4E8FB] text-cyd font-bold text-xs flex items-center justify-center">${i+1}</span><div><div class="font-semibold text-ink">${p[0]} <span class="mono text-[11px] text-slate/80">${p[2]}</span></div><div class="text-xs text-slate">${p[1]}</div></div></li>`).join('');
+$('roleChips').innerHTML=['Financial Analyst','FP&A Analyst','MIS / Reporting Analyst','Business Finance Analyst','BI / Power BI Analyst','Data Analyst (Finance)','R2R / Accounts Analyst','Finance Systems Analyst','Research Associate'].map(r=>`<span class="chip" style="cursor:default">${r}</span>`).join('');
+
+/* =================== FAQ =================== */
+const FAQ=[
+ ['Who are these courses for?','Students and graduates (B.Com, BBA, M.Com, MBA, PGDM, CA / CMA aspirants), working professionals moving into FP&A, BI or analytics, and teams in corporates and GCCs. Institutes, academies and colleges can also run them for their learners.'],
+ ['Do I need coding or prior tool knowledge?','No. Each course starts from how the tool is actually used in finance and builds up step by step, from Excel to VBA, SQL and Power BI. Every concept is tied to a finance task you already understand.'],
+ ['What software do I need?','Microsoft Excel, the free Power BI Desktop, a free SQL environment and free AI tools. No paid licences are required.'],
+ ['How are classes delivered?','Live online, on-site or hybrid. Sessions are hands-on with lab files, assignments, case studies and feedback. Recordings are shared for cohorts.'],
+ ['Can I take a single course instead of a full path?','Yes. Every course can be taken on its own, or combined into a learning path. Use the course builder above to see the duration.'],
+ ['Do you guarantee a job?','No honest trainer can guarantee a job. What I commit to is the practical skills, a portfolio of projects and interview preparation, which is what moves a candidate from rejected to shortlisted.'],
+ ['We are an institute / company. How do we start?','Most partnerships begin with a free 90-minute masterclass or a short workshop, followed by a pilot batch. Fees and revenue share depend on the model and are agreed together.']
+];
+$('faqList').innerHTML=FAQ.map(([q,a])=>`<details class="panel p-5"><summary class="flex justify-between items-center gap-3 font-semibold text-ink text-sm">${q}<svg class="chev w-4 h-4 shrink-0 text-slate transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><p class="text-sm text-slate mt-3 leading-relaxed">${a}</p></details>`).join('');
+
+/* =================== CONTACT =================== */
+function setContact(subj){
+  $('mailCta').href='mailto:bajajpuneetbajaj@gmail.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent('Hi Puneet,\n\nName:\nOrganisation (if any):\nCity:\nPhone:\n\nI would like to discuss: '+subj+'\n');
+  $('waCta').href='https://wa.me/919711166242?text='+encodeURIComponent('Hi Puneet, I visited the FinReady Academy website. '+subj+'.');
+  document.querySelectorAll('#contactAud .chip').forEach(c=>c.classList.toggle('active',c.dataset.s===subj));
+}
+document.querySelectorAll('#contactAud .chip').forEach(c=>c.onclick=()=>setContact(c.dataset.s));
+document.querySelectorAll('.subjLink').forEach(a=>a.addEventListener('click',()=>{const s=a.dataset.subj;const m=[...document.querySelectorAll('#contactAud .chip')].find(c=>c.dataset.s===s);setContact(m?s:s)}));
+setContact('Course enquiry');
+
+</script>
+</body>
+</html>
